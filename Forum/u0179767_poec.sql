@@ -1,20 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.4.15.5
 -- http://www.phpmyadmin.net
 --
--- Хост: localhost
--- Время создания: Май 17 2016 г., 17:05
--- Версия сервера: 5.5.35-33.0
--- Версия PHP: 5.2.17
+-- Хост: 127.0.0.1:3306
+-- Время создания: Июн 27 2016 г., 13:32
+-- Версия сервера: 5.5.48
+-- Версия PHP: 5.3.29
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- База данных: `u0179767_poec`
@@ -31,10 +31,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_acl_groups` (
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `auth_option_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `auth_role_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `auth_setting` tinyint(2) NOT NULL DEFAULT '0',
-  KEY `group_id` (`group_id`),
-  KEY `auth_opt_id` (`auth_option_id`),
-  KEY `auth_role_id` (`auth_role_id`)
+  `auth_setting` tinyint(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -148,46 +145,6 @@ INSERT INTO `phpbb_acl_groups` (`group_id`, `forum_id`, `auth_option_id`, `auth_
 (7, 12, 0, 24, 0),
 (8, 12, 0, 14, 0),
 (8, 12, 0, 10, 0),
-(1, 17, 0, 17, 0),
-(2, 17, 0, 15, 0),
-(3, 17, 0, 15, 0),
-(4, 17, 0, 21, 0),
-(5, 17, 0, 14, 0),
-(5, 17, 0, 10, 0),
-(6, 17, 0, 19, 0),
-(7, 17, 0, 24, 0),
-(8, 17, 0, 14, 0),
-(8, 17, 0, 10, 0),
-(1, 18, 0, 17, 0),
-(2, 18, 0, 15, 0),
-(3, 18, 0, 15, 0),
-(4, 18, 0, 21, 0),
-(5, 18, 0, 14, 0),
-(5, 18, 0, 10, 0),
-(6, 18, 0, 19, 0),
-(7, 18, 0, 24, 0),
-(8, 18, 0, 14, 0),
-(8, 18, 0, 10, 0),
-(1, 19, 0, 17, 0),
-(2, 19, 0, 15, 0),
-(3, 19, 0, 15, 0),
-(4, 19, 0, 21, 0),
-(5, 19, 0, 14, 0),
-(5, 19, 0, 10, 0),
-(6, 19, 0, 19, 0),
-(7, 19, 0, 24, 0),
-(8, 19, 0, 14, 0),
-(8, 19, 0, 10, 0),
-(1, 20, 0, 17, 0),
-(2, 20, 0, 15, 0),
-(3, 20, 0, 15, 0),
-(4, 20, 0, 21, 0),
-(5, 20, 0, 14, 0),
-(5, 20, 0, 10, 0),
-(6, 20, 0, 19, 0),
-(7, 20, 0, 24, 0),
-(8, 20, 0, 14, 0),
-(8, 20, 0, 10, 0),
 (1, 21, 0, 17, 0),
 (2, 21, 0, 15, 0),
 (3, 21, 0, 15, 0),
@@ -617,7 +574,23 @@ INSERT INTO `phpbb_acl_groups` (`group_id`, `forum_id`, `auth_option_id`, `auth_
 (1, 13, 0, 17, 0),
 (2, 13, 0, 17, 0),
 (3, 13, 0, 17, 0),
-(6, 13, 0, 17, 0);
+(6, 13, 0, 17, 0),
+(1, 17, 0, 17, 0),
+(2, 17, 0, 17, 0),
+(3, 17, 0, 17, 0),
+(6, 17, 0, 17, 0),
+(1, 18, 0, 17, 0),
+(2, 18, 0, 17, 0),
+(3, 18, 0, 17, 0),
+(6, 18, 0, 17, 0),
+(1, 19, 0, 17, 0),
+(2, 19, 0, 17, 0),
+(3, 19, 0, 17, 0),
+(6, 19, 0, 17, 0),
+(1, 20, 0, 17, 0),
+(2, 20, 0, 17, 0),
+(3, 20, 0, 17, 0),
+(6, 20, 0, 17, 0);
 
 -- --------------------------------------------------------
 
@@ -626,14 +599,12 @@ INSERT INTO `phpbb_acl_groups` (`group_id`, `forum_id`, `auth_option_id`, `auth_
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_acl_options` (
-  `auth_option_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `auth_option_id` mediumint(8) unsigned NOT NULL,
   `auth_option` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
   `is_global` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `is_local` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `founder_only` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`auth_option_id`),
-  UNIQUE KEY `auth_option` (`auth_option`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=123 ;
+  `founder_only` tinyint(1) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_acl_options`
@@ -770,15 +741,12 @@ INSERT INTO `phpbb_acl_options` (`auth_option_id`, `auth_option`, `is_global`, `
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_acl_roles` (
-  `role_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `role_id` mediumint(8) unsigned NOT NULL,
   `role_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `role_description` text COLLATE utf8_bin NOT NULL,
   `role_type` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `role_order` smallint(4) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`role_id`),
-  KEY `role_type` (`role_type`),
-  KEY `role_order` (`role_order`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=25 ;
+  `role_order` smallint(4) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_acl_roles`
@@ -819,9 +787,7 @@ INSERT INTO `phpbb_acl_roles` (`role_id`, `role_name`, `role_description`, `role
 CREATE TABLE IF NOT EXISTS `phpbb_acl_roles_data` (
   `role_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `auth_option_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `auth_setting` tinyint(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`role_id`,`auth_option_id`),
-  KEY `ath_op_id` (`auth_option_id`)
+  `auth_setting` tinyint(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -1250,10 +1216,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_acl_users` (
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `auth_option_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `auth_role_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `auth_setting` tinyint(2) NOT NULL DEFAULT '0',
-  KEY `user_id` (`user_id`),
-  KEY `auth_option_id` (`auth_option_id`),
-  KEY `auth_role_id` (`auth_role_id`)
+  `auth_setting` tinyint(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -1270,7 +1233,7 @@ INSERT INTO `phpbb_acl_users` (`user_id`, `forum_id`, `auth_option_id`, `auth_ro
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_attachments` (
-  `attach_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `attach_id` mediumint(8) unsigned NOT NULL,
   `post_msg_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `in_message` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -1284,14 +1247,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_attachments` (
   `mimetype` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `filesize` int(20) unsigned NOT NULL DEFAULT '0',
   `filetime` int(11) unsigned NOT NULL DEFAULT '0',
-  `thumbnail` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`attach_id`),
-  KEY `filetime` (`filetime`),
-  KEY `post_msg_id` (`post_msg_id`),
-  KEY `topic_id` (`topic_id`),
-  KEY `poster_id` (`poster_id`),
-  KEY `is_orphan` (`is_orphan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `thumbnail` tinyint(1) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -1300,7 +1257,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_attachments` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_banlist` (
-  `ban_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `ban_id` mediumint(8) unsigned NOT NULL,
   `ban_userid` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `ban_ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
   `ban_email` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -1308,13 +1265,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_banlist` (
   `ban_end` int(11) unsigned NOT NULL DEFAULT '0',
   `ban_exclude` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `ban_reason` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `ban_give_reason` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`ban_id`),
-  KEY `ban_end` (`ban_end`),
-  KEY `ban_user` (`ban_userid`,`ban_exclude`),
-  KEY `ban_email` (`ban_email`,`ban_exclude`),
-  KEY `ban_ip` (`ban_ip`,`ban_exclude`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `ban_give_reason` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -1332,9 +1284,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_bbcodes` (
   `first_pass_match` mediumtext COLLATE utf8_bin NOT NULL,
   `first_pass_replace` mediumtext COLLATE utf8_bin NOT NULL,
   `second_pass_match` mediumtext COLLATE utf8_bin NOT NULL,
-  `second_pass_replace` mediumtext COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`bbcode_id`),
-  KEY `display_on_post` (`display_on_posting`)
+  `second_pass_replace` mediumtext COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -1345,8 +1295,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_bbcodes` (
 
 CREATE TABLE IF NOT EXISTS `phpbb_bookmarks` (
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`topic_id`,`user_id`)
+  `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -1356,15 +1305,13 @@ CREATE TABLE IF NOT EXISTS `phpbb_bookmarks` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_bots` (
-  `bot_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `bot_id` mediumint(8) unsigned NOT NULL,
   `bot_active` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `bot_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `bot_agent` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `bot_ip` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`bot_id`),
-  KEY `bot_active` (`bot_active`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=46 ;
+  `bot_ip` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_bots`
@@ -1426,9 +1373,7 @@ INSERT INTO `phpbb_bots` (`bot_id`, `bot_active`, `bot_name`, `user_id`, `bot_ag
 CREATE TABLE IF NOT EXISTS `phpbb_config` (
   `config_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `config_value` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `is_dynamic` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`config_name`),
-  KEY `is_dynamic` (`is_dynamic`)
+  `is_dynamic` tinyint(1) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -1508,7 +1453,7 @@ INSERT INTO `phpbb_config` (`config_name`, `config_value`, `is_dynamic`) VALUES
 ('bump_interval', '10', 0),
 ('bump_type', 'd', 0),
 ('cache_gc', '7200', 0),
-('cache_last_gc', '1463491047', 1),
+('cache_last_gc', '1467019912', 1),
 ('captcha_gd', '1', 0),
 ('captcha_gd_3d_noise', '1', 0),
 ('captcha_gd_fonts', '1', 0),
@@ -1531,7 +1476,7 @@ INSERT INTO `phpbb_config` (`config_name`, `config_value`, `is_dynamic`) VALUES
 ('coppa_mail', '', 0),
 ('cron_lock', '0', 1),
 ('database_gc', '604800', 0),
-('database_last_gc', '1463399709', 1),
+('database_last_gc', '1467019929', 1),
 ('dbms_version', '5.5.35-33.0', 0),
 ('default_dateformat', '|d M Y|, H:i', 0),
 ('default_lang', 'ru', 0),
@@ -1671,8 +1616,8 @@ INSERT INTO `phpbb_config` (`config_name`, `config_value`, `is_dynamic`) VALUES
 ('newest_user_id', '56', 1),
 ('newest_username', '#ReJeen#', 1),
 ('num_files', '0', 1),
-('num_posts', '4', 1),
-('num_topics', '3', 1),
+('num_posts', '18', 1),
+('num_topics', '17', 1),
 ('num_users', '6', 1),
 ('override_user_style', '0', 0),
 ('pass_complex', 'PASS_TYPE_ANY', 0),
@@ -1686,12 +1631,12 @@ INSERT INTO `phpbb_config` (`config_name`, `config_value`, `is_dynamic`) VALUES
 ('print_pm', '1', 0),
 ('questionnaire_unique_id', '6fcfae77e636beac', 0),
 ('queue_interval', '60', 0),
-('rand_seed', '26b8c8bd38e823c4d3b543d047ca4330', 1),
-('rand_seed_last_update', '1463493061', 1),
+('rand_seed', '7d00e918d63cfdcabbc65a54e849b9a2', 1),
+('rand_seed_last_update', '1467023421', 1),
 ('ranks_path', 'images/ranks', 0),
 ('read_notification_expire_days', '30', 0),
 ('read_notification_gc', '86400', 0),
-('read_notification_last_gc', '1463491015', 1),
+('read_notification_last_gc', '1467022705', 1),
 ('record_online_date', '1462571473', 1),
 ('record_online_users', '3', 1),
 ('referer_validation', '1', 0),
@@ -1702,7 +1647,7 @@ INSERT INTO `phpbb_config` (`config_name`, `config_value`, `is_dynamic`) VALUES
 ('search_gc', '7200', 0),
 ('search_indexing_state', '', 1),
 ('search_interval', '0', 0),
-('search_last_gc', '1463491053', 1),
+('search_last_gc', '1467019918', 1),
 ('search_store_results', '1800', 0),
 ('search_type', '\\phpbb\\search\\fulltext_native', 0),
 ('secure_allow_deny', '1', 0),
@@ -1712,7 +1657,7 @@ INSERT INTO `phpbb_config` (`config_name`, `config_value`, `is_dynamic`) VALUES
 ('server_port', '80', 0),
 ('server_protocol', 'http://', 0),
 ('session_gc', '3600', 0),
-('session_last_gc', '1463491049', 1),
+('session_last_gc', '1467022689', 1),
 ('session_length', '3600', 0),
 ('site_desc', 'Информационный портал любителей экзотики', 0),
 ('site_home_text', 'Сайт poecilotheria.ru', 0),
@@ -1737,7 +1682,7 @@ INSERT INTO `phpbb_config` (`config_name`, `config_value`, `is_dynamic`) VALUES
 ('version', '3.1.9', 0),
 ('warnings_expire_days', '90', 0),
 ('warnings_gc', '14400', 0),
-('warnings_last_gc', '1463491133', 1);
+('warnings_last_gc', '1467022709', 1);
 
 -- --------------------------------------------------------
 
@@ -1747,8 +1692,7 @@ INSERT INTO `phpbb_config` (`config_name`, `config_value`, `is_dynamic`) VALUES
 
 CREATE TABLE IF NOT EXISTS `phpbb_config_text` (
   `config_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `config_value` mediumtext COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`config_name`)
+  `config_value` mediumtext COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -1773,17 +1717,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_confirm` (
   `confirm_type` tinyint(3) NOT NULL DEFAULT '0',
   `code` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
   `seed` int(10) unsigned NOT NULL DEFAULT '0',
-  `attempts` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`session_id`,`confirm_id`),
-  KEY `confirm_type` (`confirm_type`)
+  `attempts` mediumint(8) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Дамп данных таблицы `phpbb_confirm`
---
-
-INSERT INTO `phpbb_confirm` (`confirm_id`, `session_id`, `confirm_type`, `code`, `seed`, `attempts`) VALUES
-('f49a0d8b5071a37a03346eeb9fdf99a6', 'cdca57c0001ee71e5b8bd24b67999699', 1, '276Y', 1608820291, 0);
 
 -- --------------------------------------------------------
 
@@ -1792,10 +1727,9 @@ INSERT INTO `phpbb_confirm` (`confirm_id`, `session_id`, `confirm_type`, `code`,
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_disallow` (
-  `disallow_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `disallow_username` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`disallow_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `disallow_id` mediumint(8) unsigned NOT NULL,
+  `disallow_username` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -1804,16 +1738,14 @@ CREATE TABLE IF NOT EXISTS `phpbb_disallow` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_drafts` (
-  `draft_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `draft_id` mediumint(8) unsigned NOT NULL,
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `save_time` int(11) unsigned NOT NULL DEFAULT '0',
   `draft_subject` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `draft_message` mediumtext COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`draft_id`),
-  KEY `save_time` (`save_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `draft_message` mediumtext COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -1824,8 +1756,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_drafts` (
 CREATE TABLE IF NOT EXISTS `phpbb_ext` (
   `ext_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `ext_active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ext_state` text COLLATE utf8_bin NOT NULL,
-  UNIQUE KEY `ext_name` (`ext_name`)
+  `ext_state` text COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -1835,11 +1766,10 @@ CREATE TABLE IF NOT EXISTS `phpbb_ext` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_extensions` (
-  `extension_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `extension_id` mediumint(8) unsigned NOT NULL,
   `group_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `extension` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`extension_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=67 ;
+  `extension` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_extensions`
@@ -1920,7 +1850,7 @@ INSERT INTO `phpbb_extensions` (`extension_id`, `group_id`, `extension`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_extension_groups` (
-  `group_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `group_id` mediumint(8) unsigned NOT NULL,
   `group_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `cat_id` tinyint(2) NOT NULL DEFAULT '0',
   `allow_group` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -1928,9 +1858,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_extension_groups` (
   `upload_icon` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `max_filesize` int(20) unsigned NOT NULL DEFAULT '0',
   `allowed_forums` text COLLATE utf8_bin NOT NULL,
-  `allow_in_pm` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=10 ;
+  `allow_in_pm` tinyint(1) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_extension_groups`
@@ -1954,7 +1883,7 @@ INSERT INTO `phpbb_extension_groups` (`group_id`, `group_name`, `cat_id`, `allow
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_forums` (
-  `forum_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `forum_id` mediumint(8) unsigned NOT NULL,
   `parent_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `left_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `right_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -2002,11 +1931,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_forums` (
   `enable_shadow_prune` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `prune_shadow_days` mediumint(8) unsigned NOT NULL DEFAULT '7',
   `prune_shadow_freq` mediumint(8) unsigned NOT NULL DEFAULT '1',
-  `prune_shadow_next` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`forum_id`),
-  KEY `left_right_id` (`left_id`,`right_id`),
-  KEY `forum_lastpost_id` (`forum_last_post_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=62 ;
+  `prune_shadow_next` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_forums`
@@ -2028,10 +1954,10 @@ INSERT INTO `phpbb_forums` (`forum_id`, `parent_id`, `left_id`, `right_id`, `for
 (14, 4, 7, 8, 'a:2:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}}', 'Метод разворачивания экзувия для определения пола', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 5, 2, 'Разворачивание экзувия Poecilotheria rufilata L5 для определения пола', 1463401003, 'stanruss', 'AA0000', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 7, 1, 0),
 (15, 4, 9, 102, 'a:2:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}}', 'Фото сперматек пауков-птицеедов', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 0, 0, '', 0, '', '', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0),
 (16, 15, 10, 11, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Acanthoscurria', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 6, 2, 'Acanthoscurria geniculata', 1463402454, 'stanruss', 'AA0000', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 7, 1, 0),
-(17, 15, 12, 13, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Aphonopelma', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 0, 0, '', 0, '', '', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0),
-(18, 15, 14, 15, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Augacephalus', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 0, 0, '', 0, '', '', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0),
-(19, 15, 16, 17, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Avicularia', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 0, 0, '', 0, '', '', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0),
-(20, 15, 18, 19, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Brachypelma', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 0, 0, '', 0, '', '', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0),
+(17, 15, 12, 13, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Aphonopelma', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 7, 2, 'Aphonopelma anax', 1465899974, 'stanruss', 'AA0000', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 7, 1, 0),
+(18, 15, 14, 15, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Augacephalus', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 8, 2, 'Augacephalus breyeri', 1465900397, 'stanruss', 'AA0000', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 7, 1, 0),
+(19, 15, 16, 17, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Avicularia', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 11, 2, 'Avicularia metallica', 1465900794, 'stanruss', 'AA0000', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 3, 0, 0, 3, 0, 0, 0, 7, 1, 0),
+(20, 15, 18, 19, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Brachypelma', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 20, 2, 'Brachypelma smithi', 1467023259, 'stanruss', 'AA0000', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 9, 0, 0, 9, 0, 0, 0, 7, 1, 0),
 (21, 15, 20, 21, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Bumba', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 0, 0, '', 0, '', '', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0),
 (22, 15, 22, 23, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Ceratogyrus', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 0, 0, '', 0, '', '', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0),
 (23, 15, 24, 25, 'a:3:{i:1;a:2:{i:0;s:37:"Полезная информация";i:1;i:0;}i:4;a:2:{i:0;s:68:"Определение пола у пауков - птицеедов";i:1;i:1;}i:15;a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;i:1;}}', 'Chilobrachys', '', '', 7, '', '', '', 0, '', '', '', '', 7, '', 0, 1, 0, 0, 0, '', 0, '', '', 48, 0, 1, 0, 0, 0, 7, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0),
@@ -2083,8 +2009,7 @@ INSERT INTO `phpbb_forums` (`forum_id`, `parent_id`, `left_id`, `right_id`, `for
 CREATE TABLE IF NOT EXISTS `phpbb_forums_access` (
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `session_id` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`forum_id`,`user_id`,`session_id`)
+  `session_id` char(32) COLLATE utf8_bin NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -2096,8 +2021,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_forums_access` (
 CREATE TABLE IF NOT EXISTS `phpbb_forums_track` (
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `mark_time` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_id`,`forum_id`)
+  `mark_time` int(11) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -2109,7 +2033,11 @@ INSERT INTO `phpbb_forums_track` (`user_id`, `forum_id`, `mark_time`) VALUES
 (2, 4, 1463400090),
 (2, 13, 1463400650),
 (2, 14, 1463401003),
-(2, 16, 1463402454);
+(2, 16, 1463402454),
+(2, 17, 1465899974),
+(2, 18, 1465900397),
+(2, 19, 1465900794),
+(2, 20, 1467023259);
 
 -- --------------------------------------------------------
 
@@ -2120,10 +2048,7 @@ INSERT INTO `phpbb_forums_track` (`user_id`, `forum_id`, `mark_time`) VALUES
 CREATE TABLE IF NOT EXISTS `phpbb_forums_watch` (
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `notify_status` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  KEY `forum_id` (`forum_id`),
-  KEY `user_id` (`user_id`),
-  KEY `notify_stat` (`notify_status`)
+  `notify_status` tinyint(1) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -2133,7 +2058,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_forums_watch` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_groups` (
-  `group_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `group_id` mediumint(8) unsigned NOT NULL,
   `group_type` tinyint(4) NOT NULL DEFAULT '1',
   `group_founder_manage` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `group_skip_auth` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -2153,10 +2078,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_groups` (
   `group_receive_pm` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `group_message_limit` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `group_legend` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `group_max_recipients` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`group_id`),
-  KEY `group_legend_name` (`group_legend`,`group_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
+  `group_max_recipients` mediumint(8) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_groups`
@@ -2179,15 +2102,13 @@ INSERT INTO `phpbb_groups` (`group_id`, `group_type`, `group_founder_manage`, `g
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_icons` (
-  `icons_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `icons_id` mediumint(8) unsigned NOT NULL,
   `icons_url` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `icons_width` tinyint(4) NOT NULL DEFAULT '0',
   `icons_height` tinyint(4) NOT NULL DEFAULT '0',
   `icons_order` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `display_on_posting` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`icons_id`),
-  KEY `display_on_posting` (`display_on_posting`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+  `display_on_posting` tinyint(1) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_icons`
@@ -2212,15 +2133,13 @@ INSERT INTO `phpbb_icons` (`icons_id`, `icons_url`, `icons_width`, `icons_height
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_lang` (
-  `lang_id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `lang_id` tinyint(4) NOT NULL,
   `lang_iso` varchar(30) COLLATE utf8_bin NOT NULL DEFAULT '',
   `lang_dir` varchar(30) COLLATE utf8_bin NOT NULL DEFAULT '',
   `lang_english_name` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `lang_local_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `lang_author` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`lang_id`),
-  KEY `lang_iso` (`lang_iso`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+  `lang_author` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_lang`
@@ -2237,7 +2156,7 @@ INSERT INTO `phpbb_lang` (`lang_id`, `lang_iso`, `lang_dir`, `lang_english_name`
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_log` (
-  `log_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `log_id` mediumint(8) unsigned NOT NULL,
   `log_type` tinyint(4) NOT NULL DEFAULT '0',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -2246,14 +2165,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_log` (
   `log_ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
   `log_time` int(11) unsigned NOT NULL DEFAULT '0',
   `log_operation` text COLLATE utf8_bin NOT NULL,
-  `log_data` mediumtext COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`log_id`),
-  KEY `log_type` (`log_type`),
-  KEY `forum_id` (`forum_id`),
-  KEY `topic_id` (`topic_id`),
-  KEY `reportee_id` (`reportee_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=195 ;
+  `log_data` mediumtext COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_log`
@@ -2453,7 +2366,17 @@ INSERT INTO `phpbb_log` (`log_id`, `log_type`, `user_id`, `forum_id`, `topic_id`
 (191, 0, 2, 0, 0, 0, '46.173.34.207', 1463491238, 'LOG_FORUM_EDIT', 'a:1:{i:0;s:68:"Определение пола у пауков - птицеедов";}'),
 (192, 0, 2, 0, 0, 0, '46.173.34.207', 1463491238, 'LOG_FORUM_COPIED_PERMISSIONS', 'a:2:{i:0;s:37:"Полезная информация";i:1;s:68:"Определение пола у пауков - птицеедов";}'),
 (193, 0, 2, 0, 0, 0, '46.173.34.207', 1463491332, 'LOG_FORUM_EDIT', 'a:1:{i:0;s:44:"Методы определения пола";}'),
-(194, 0, 2, 0, 0, 0, '46.173.34.207', 1463491332, 'LOG_FORUM_COPIED_PERMISSIONS', 'a:2:{i:0;s:37:"Полезная информация";i:1;s:44:"Методы определения пола";}');
+(194, 0, 2, 0, 0, 0, '46.173.34.207', 1463491332, 'LOG_FORUM_COPIED_PERMISSIONS', 'a:2:{i:0;s:37:"Полезная информация";i:1;s:44:"Методы определения пола";}'),
+(195, 0, 2, 0, 0, 0, '127.0.0.1', 1465900176, 'LOG_ADMIN_AUTH_SUCCESS', ''),
+(196, 0, 2, 0, 0, 0, '127.0.0.1', 1465900225, 'LOG_FORUM_EDIT', 'a:1:{i:0;s:11:"Aphonopelma";}'),
+(197, 0, 2, 0, 0, 0, '127.0.0.1', 1465900225, 'LOG_FORUM_COPIED_PERMISSIONS', 'a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;s:11:"Aphonopelma";}'),
+(198, 0, 2, 0, 0, 0, '127.0.0.1', 1465900476, 'LOG_FORUM_EDIT', 'a:1:{i:0;s:12:"Augacephalus";}'),
+(199, 0, 2, 0, 0, 0, '127.0.0.1', 1465900476, 'LOG_FORUM_COPIED_PERMISSIONS', 'a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;s:12:"Augacephalus";}'),
+(200, 0, 2, 0, 0, 0, '127.0.0.1', 1465900832, 'LOG_FORUM_EDIT', 'a:1:{i:0;s:10:"Avicularia";}'),
+(201, 0, 2, 0, 0, 0, '127.0.0.1', 1465900832, 'LOG_FORUM_COPIED_PERMISSIONS', 'a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;s:10:"Avicularia";}'),
+(202, 0, 2, 0, 0, 0, '127.0.0.1', 1467023337, 'LOG_ADMIN_AUTH_SUCCESS', ''),
+(203, 0, 2, 0, 0, 0, '127.0.0.1', 1467023374, 'LOG_FORUM_EDIT', 'a:1:{i:0;s:11:"Brachypelma";}'),
+(204, 0, 2, 0, 0, 0, '127.0.0.1', 1467023374, 'LOG_FORUM_COPIED_PERMISSIONS', 'a:2:{i:0;s:59:"Фото сперматек пауков-птицеедов";i:1;s:11:"Brachypelma";}');
 
 -- --------------------------------------------------------
 
@@ -2468,11 +2391,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_login_attempts` (
   `attempt_time` int(11) unsigned NOT NULL DEFAULT '0',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `username` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '0',
-  `username_clean` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '0',
-  KEY `att_ip` (`attempt_ip`,`attempt_time`),
-  KEY `att_for` (`attempt_forwarded_for`,`attempt_time`),
-  KEY `att_time` (`attempt_time`),
-  KEY `user_id` (`user_id`)
+  `username_clean` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -2488,8 +2407,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_migrations` (
   `migration_data_done` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `migration_data_state` text COLLATE utf8_bin NOT NULL,
   `migration_start_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `migration_end_time` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`migration_name`)
+  `migration_end_time` int(11) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -2680,9 +2598,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_moderator_cache` (
   `username` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `group_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `group_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `display_on_index` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  KEY `disp_idx` (`display_on_index`),
-  KEY `forum_id` (`forum_id`)
+  `display_on_index` tinyint(1) unsigned NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -2699,10 +2615,6 @@ INSERT INTO `phpbb_moderator_cache` (`forum_id`, `user_id`, `username`, `group_i
 (10, 0, '', 8, 'Администраторы', 1),
 (11, 0, '', 8, 'Администраторы', 1),
 (12, 0, '', 8, 'Администраторы', 1),
-(17, 0, '', 8, 'Администраторы', 1),
-(18, 0, '', 8, 'Администраторы', 1),
-(19, 0, '', 8, 'Администраторы', 1),
-(20, 0, '', 8, 'Администраторы', 1),
 (21, 0, '', 8, 'Администраторы', 1),
 (22, 0, '', 8, 'Администраторы', 1),
 (23, 0, '', 8, 'Администраторы', 1),
@@ -2752,7 +2664,7 @@ INSERT INTO `phpbb_moderator_cache` (`forum_id`, `user_id`, `username`, `group_i
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_modules` (
-  `module_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `module_id` mediumint(8) unsigned NOT NULL,
   `module_enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `module_display` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `module_basename` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -2762,12 +2674,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_modules` (
   `right_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `module_langname` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `module_mode` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `module_auth` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`module_id`),
-  KEY `left_right_id` (`left_id`,`right_id`),
-  KEY `module_enabled` (`module_enabled`),
-  KEY `class_left_id` (`module_class`,`left_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=207 ;
+  `module_auth` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=207 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_modules`
@@ -2988,18 +2896,15 @@ INSERT INTO `phpbb_modules` (`module_id`, `module_enabled`, `module_display`, `m
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_notifications` (
-  `notification_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `notification_id` int(10) unsigned NOT NULL,
   `notification_type_id` smallint(4) unsigned NOT NULL DEFAULT '0',
   `item_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `item_parent_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `notification_read` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `notification_time` int(11) unsigned NOT NULL DEFAULT '1',
-  `notification_data` text COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`notification_id`),
-  KEY `item_ident` (`notification_type_id`,`item_id`),
-  KEY `user` (`user_id`,`notification_read`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
+  `notification_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -3008,12 +2913,10 @@ CREATE TABLE IF NOT EXISTS `phpbb_notifications` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_notification_types` (
-  `notification_type_id` smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  `notification_type_id` smallint(4) unsigned NOT NULL,
   `notification_type_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `notification_type_enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`notification_type_id`),
-  UNIQUE KEY `type` (`notification_type_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
+  `notification_type_enabled` tinyint(1) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_notification_types`
@@ -3041,8 +2944,7 @@ INSERT INTO `phpbb_notification_types` (`notification_type_id`, `notification_ty
 CREATE TABLE IF NOT EXISTS `phpbb_oauth_accounts` (
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `provider` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `oauth_provider_id` text COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`user_id`,`provider`)
+  `oauth_provider_id` text COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -3055,9 +2957,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_oauth_tokens` (
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `session_id` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `provider` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `oauth_token` mediumtext COLLATE utf8_bin NOT NULL,
-  KEY `user_id` (`user_id`),
-  KEY `provider` (`provider`)
+  `oauth_token` mediumtext COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -3070,9 +2970,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_poll_options` (
   `poll_option_id` tinyint(4) NOT NULL DEFAULT '0',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `poll_option_text` text COLLATE utf8_bin NOT NULL,
-  `poll_option_total` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  KEY `poll_opt_id` (`poll_option_id`),
-  KEY `topic_id` (`topic_id`)
+  `poll_option_total` mediumint(8) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -3085,10 +2983,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_poll_votes` (
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `poll_option_id` tinyint(4) NOT NULL DEFAULT '0',
   `vote_user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `vote_user_ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
-  KEY `topic_id` (`topic_id`),
-  KEY `vote_user_id` (`vote_user_id`),
-  KEY `vote_user_ip` (`vote_user_ip`)
+  `vote_user_ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -3098,7 +2993,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_poll_votes` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_posts` (
-  `post_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `post_id` mediumint(8) unsigned NOT NULL,
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `poster_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -3126,16 +3021,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_posts` (
   `post_visibility` tinyint(3) NOT NULL DEFAULT '0',
   `post_delete_time` int(11) unsigned NOT NULL DEFAULT '0',
   `post_delete_reason` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `post_delete_user` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`post_id`),
-  KEY `forum_id` (`forum_id`),
-  KEY `topic_id` (`topic_id`),
-  KEY `poster_ip` (`poster_ip`),
-  KEY `poster_id` (`poster_id`),
-  KEY `tid_post_time` (`topic_id`,`post_time`),
-  KEY `post_username` (`post_username`),
-  KEY `post_visibility` (`post_visibility`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+  `post_delete_user` mediumint(8) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_posts`
@@ -3144,7 +3031,21 @@ CREATE TABLE IF NOT EXISTS `phpbb_posts` (
 INSERT INTO `phpbb_posts` (`post_id`, `topic_id`, `forum_id`, `poster_id`, `icon_id`, `poster_ip`, `post_time`, `post_reported`, `enable_bbcode`, `enable_smilies`, `enable_magic_url`, `enable_sig`, `post_username`, `post_subject`, `post_text`, `post_checksum`, `post_attachment`, `bbcode_bitfield`, `bbcode_uid`, `post_postcount`, `post_edit_time`, `post_edit_reason`, `post_edit_user`, `post_edit_count`, `post_edit_locked`, `post_visibility`, `post_delete_time`, `post_delete_reason`, `post_delete_user`) VALUES
 (4, 4, 13, 2, 0, '46.173.34.207', 1463400650, 0, 1, 1, 1, 1, '', 'Методы определения пола пауков - птицеедов', 'Есть два способа определить пол у паука, первый - осмотр вентральной стороны опистосомы (брюшка) паука на наличие внешних половых признаков, что в некоторых случаях приводит к ошибочному мнению, так как у некоторых видов пауков может быть похожий вид самца и самки; второй, наиболее точный способ - осмотр внутренней стороны экзувия (сброшенной шкуры), между двух верхних книжных легких на наличие сперматеки самки или половые органы репродуктивной системы самца.\n\nДавайте подробнее рассмотрим оба способа. \n\n[b:3epq3yxn]Итак первый: [/b:3epq3yxn]\nСмотря на вентральную сторону брюшка, где находятся 4 пятнышка - книжных легких паука, нас должно интересовать то, что находится между двух верхних легких, а это - какое расстояние между легких, угол наклона легких по отношению друг друга, форма эпигастральной борозды.\n\n[img:3epq3yxn]http&#58;//cs622024&#46;vk&#46;me/v622024874/16078/iArl2PwDgXY&#46;jpg[/img:3epq3yxn]\n\nУ самок расстояние между легких больше чем у самцов, у самцов стенки легких стоят практически параллельно друг другу, у самок в виде трапеции, у самцов эпигастральная борозда практически как ровная линия, у самок же в виде дуги. А так же у самцов по центру между легких можно наблюдать пятнышко из волосок в виде треугольника, а в некоторых случаях у самок можно наблюдать половую щель вдоль борозды от легкого до легкого.\n\nСамец:\n[img:3epq3yxn]http&#58;//i38&#46;servimg&#46;com/u/f38/19/09/76/07/az5yon10&#46;jpg[/img:3epq3yxn] \n\nСамка:\n[img:3epq3yxn]http&#58;//cs622717&#46;vk&#46;me/v622717576/c792/Tg67XXZ4O6c&#46;jpg[/img:3epq3yxn]\n\n[b:3epq3yxn]Второй:[/b:3epq3yxn]\nЕсли первый способ имеет очень большую погрешность из-за нечетко выраженных внешних признаков, то второй способ достаточно точный для определения пола, для этого нам понадобиться дождаться линьки паука, забрать экзувий и смотреть уже по наличию сперматеки или органов самца между легких, только уже с внутренней стороны шкуры паука.\nОпределять пол по экзувию следует не ранее 4 или 5 линьки паука, так как в некоторых случаях у разных видов органы самца похожи на сперматеку.\nДля определения нам надо развернуть экзувий, для этого нам понадобится микроскоп, две иголки, пинцет, вода/спирт, краситель (фуксин/фукорцин/зеленка), шприц.\nКак это сделать показано - [url=http&#58;//www&#46;spidercatalog&#46;ru/t116-topic:3epq3yxn]ТУТ[/url:3epq3yxn]\nКаталог сперматек можно посмотреть - [url=http&#58;//www&#46;spidercatalog&#46;ru/f42-forum:3epq3yxn]ТУТ[/url:3epq3yxn]', '37ee6ac2d4ecbc8808c2f98a9985c659', 0, 'WA==', '3epq3yxn', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
 (5, 5, 14, 2, 0, '46.173.34.207', 1463401003, 0, 1, 1, 1, 1, '', 'Разворачивание экзувия Poecilotheria rufilata L5 для определения пола', '[url:3doa2ue4]https&#58;//www&#46;youtube&#46;com/watch?v=QFzcuRzTwKk[/url:3doa2ue4]\n\n[b:3doa2ue4]Текстовая версия:[/b:3doa2ue4]\n\n1. Кладем экзувий на предметное стекло, если возможно расправляем ноги паука в стороны.\n2. Наливаем в стернум (полость брюха) немного воды, так чтобы вода залилась внутрь лап.\n3. Капаем туда же 2-3 капли &quot;Фэйри&quot; или любого другого, на подобие, средство для мытья посуды.\n4. Снова наливаем воды.\n5. Двумя острыми иголками аккуратно расправляем шкуру так, чтобы была видна область между двумя верхними легкими паука с внутренней стороны. \n6. Капаем между легких совсем немного капель раствора &quot;Фуксин&quot; или &quot;Фукорцин&quot; или обычную зеленку (Бриллиантовый зелёный).\n7. Спустя секунд 10 смываем ее водой.\n8. Кладем расправленный и окрашенный экзувий под микроскоп и смотрим на наличие сперматеки или отсутствие ее.\n\nЕсли сперматека присутствует, то пол вашего паука - самка.\n\nКаталог сперматек вы можете посмотреть в этом разделе - [url=http&#58;//spidercatalog&#46;forum2x2&#46;ru/f42-forum:3doa2ue4]Фото сперматек пауков-птицеедов[/url:3doa2ue4]', '6146d8cd9903b577ea9bdc1410b00321', 0, 'UA==', '3doa2ue4', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
-(6, 6, 16, 2, 0, '46.173.34.207', 1463402454, 0, 1, 1, 1, 1, '', 'Acanthoscurria geniculata', '[img:1fs5jou2]http&#58;//cs619223&#46;vk&#46;me/v619223972/a6d/anPDLyLYkrI&#46;jpg[/img:1fs5jou2]\n\n[img:1fs5jou2]http&#58;//cs619223&#46;vk&#46;me/v619223972/a64/awiK6fvso1U&#46;jpg[/img:1fs5jou2]\n\n[img:1fs5jou2]http&#58;//cs619223&#46;vk&#46;me/v619223972/a5b/QuPJL_GnNck&#46;jpg[/img:1fs5jou2]', '49983af893f5d1be9ba7045cbaf2f96f', 0, 'CA==', '1fs5jou2', 1, 0, '', 0, 0, 0, 1, 0, '', 0);
+(6, 6, 16, 2, 0, '46.173.34.207', 1463402454, 0, 1, 1, 1, 1, '', 'Acanthoscurria geniculata', '[img:1fs5jou2]http&#58;//cs619223&#46;vk&#46;me/v619223972/a6d/anPDLyLYkrI&#46;jpg[/img:1fs5jou2]\n\n[img:1fs5jou2]http&#58;//cs619223&#46;vk&#46;me/v619223972/a64/awiK6fvso1U&#46;jpg[/img:1fs5jou2]\n\n[img:1fs5jou2]http&#58;//cs619223&#46;vk&#46;me/v619223972/a5b/QuPJL_GnNck&#46;jpg[/img:1fs5jou2]', '49983af893f5d1be9ba7045cbaf2f96f', 0, 'CA==', '1fs5jou2', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(7, 7, 17, 2, 0, '127.0.0.1', 1465899974, 0, 1, 1, 1, 1, '', 'Aphonopelma anax', '[img:5s48m2tr]http&#58;//i861&#46;photobucket&#46;com/albums/ab171/CassMack/Aphonopelmaanaxspermathecae&#46;jpg[/img:5s48m2tr]\nФото взято с [url:5s48m2tr]http&#58;//www&#46;arachnoboards&#46;com/[/url:5s48m2tr]', '2ce3a3b4116c3642ab29b5c1c9add731', 0, 'GA==', '5s48m2tr', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(8, 8, 18, 2, 0, '127.0.0.1', 1465900397, 0, 1, 1, 1, 1, '', 'Augacephalus breyeri', '[img:25e7cxne]http&#58;//cs403018&#46;vk&#46;me/v403018972/b1a9/M2dr5r4jzPc&#46;jpg[/img:25e7cxne]\nL6', 'aaa6cf931ce90bf393bf162299eddb8a', 0, 'CA==', '25e7cxne', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(9, 9, 19, 2, 0, '127.0.0.1', 1465900633, 0, 1, 1, 1, 1, '', 'Avicularia versicolor', '[img:17ys8swb]http&#58;//i2&#46;photobucket&#46;com/albums/y31/Snipes05/Tarantulas/Avicularia/versicolor/Juvenile%20female%20Kristin/DSCN1691&#46;jpg[/img:17ys8swb]\n\nФото взято с [url:17ys8swb]http&#58;//www&#46;arachnoboards&#46;com/[/url:17ys8swb]', 'cfe2049f6fc39e084f3191e2d9214f5c', 0, 'GA==', '17ys8swb', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(10, 10, 19, 2, 0, '127.0.0.1', 1465900731, 0, 1, 1, 1, 1, '', 'Avicularia geroldi', '[img:2my3e354]http&#58;//i38&#46;servimg&#46;com/u/f38/19/09/76/07/imag0810&#46;jpg[/img:2my3e354]\nL4-5\n[img:2my3e354]http&#58;//i19&#46;servimg&#46;com/u/f19/19/09/76/07/-ss0tu10&#46;jpg[/img:2my3e354]\nL7', '6cb5b5f682c67c3f07188a3ae5edd3cf', 0, 'CA==', '2my3e354', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(11, 11, 19, 2, 0, '127.0.0.1', 1465900794, 0, 1, 1, 1, 1, '', 'Avicularia metallica', '[img:1pmtc8q5]http&#58;//cs623129&#46;vk&#46;me/v623129045/14ec7/6QGZncK2oZ0&#46;jpg[/img:1pmtc8q5]\nL5-6\n[img:1pmtc8q5]http&#58;//cs312520&#46;vk&#46;me/v312520972/8edc/gL54UGytgCI&#46;jpg[/img:1pmtc8q5]', '1ec6dab474e6c8d87b92f669a9dfaab4', 0, 'CA==', '1pmtc8q5', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(12, 12, 20, 2, 0, '127.0.0.1', 1467022855, 0, 1, 1, 1, 1, '', 'Brachypelma auratum', '[img:2qs4zk4p]http&#58;//i19&#46;servimg&#46;com/u/f19/19/09/76/07/dsc_2610&#46;jpg[/img:2qs4zk4p]', 'f64a57d8cd8719a12284c298e13b8dda', 0, 'CA==', '2qs4zk4p', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(13, 13, 20, 2, 0, '127.0.0.1', 1467022896, 0, 1, 1, 1, 1, '', 'Brachypelma vagans', '[img:7862041n]http&#58;//s017&#46;radikal&#46;ru/i406/1411/10/e9d6bab7cb15&#46;jpg[/img:7862041n]', '998df55daf9f419f74db774c545d1a4f', 0, 'CA==', '7862041n', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(14, 14, 20, 2, 0, '127.0.0.1', 1467023009, 0, 1, 1, 1, 1, '', 'Brachypelma boehmei', '[img:27p0r20t]http&#58;//storage6&#46;static&#46;itmages&#46;ru/i/12/0918/h_1347990495_9792631_0ecbdeb40a&#46;jpeg[/img:27p0r20t]\n\nЛ7', '5d8812d7dce5b5a94f72874c0b0bcb65', 0, 'CA==', '27p0r20t', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(15, 15, 20, 2, 0, '127.0.0.1', 1467023043, 0, 1, 1, 1, 1, '', 'Brachypelma verdezi', '[img:gnxj8w1c]http&#58;//i18&#46;servimg&#46;com/u/f18/19/09/76/07/jbdqlj12&#46;jpg[/img:gnxj8w1c]', '60c4761accf53347723a1cd068fd780e', 0, 'CA==', 'gnxj8w1c', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(16, 16, 20, 2, 0, '127.0.0.1', 1467023044, 0, 1, 1, 1, 1, '', 'Brachypelma verdezi', '[img:2j8tmmly]http&#58;//i18&#46;servimg&#46;com/u/f18/19/09/76/07/jbdqlj12&#46;jpg[/img:2j8tmmly]', '60c4761accf53347723a1cd068fd780e', 0, 'CA==', '2j8tmmly', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(17, 17, 20, 2, 0, '127.0.0.1', 1467023096, 0, 1, 1, 1, 1, '', 'Brachypelma emilia', '[img:3bannaiw]http&#58;//s50&#46;radikal&#46;ru/i129/1411/55/4010693c6f97&#46;jpg[/img:3bannaiw]\n\nЛ5', 'aae07b13aa49a44ac93dd8a03ec2256f', 0, 'CA==', '3bannaiw', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(18, 18, 20, 2, 0, '127.0.0.1', 1467023144, 0, 1, 1, 1, 1, '', 'Brachypelma albopilosum', '[img:1jyx0dpd]http&#58;//i861&#46;photobucket&#46;com/albums/ab171/CassMack/IMG_2338&#46;jpg[/img:1jyx0dpd]', 'd94744d771ae44f650baf4efd1ad7c12', 0, 'CA==', '1jyx0dpd', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(19, 19, 20, 2, 0, '127.0.0.1', 1467023180, 0, 1, 1, 1, 1, '', 'Brachypelma sabulosum', '[img:2mpagqv9]http&#58;//i192&#46;photobucket&#46;com/albums/z153/kean912/PeT%20PicTuRes/Brachypelma%20Sabulosum/BSabulosum00114molt_zps9e4818f0&#46;jpg[/img:2mpagqv9]', '6b61b6e9bde4c8db80e32bb7082ac9fc', 0, 'CA==', '2mpagqv9', 1, 0, '', 0, 0, 0, 1, 0, '', 0),
+(20, 20, 20, 2, 0, '127.0.0.1', 1467023259, 0, 1, 1, 1, 1, '', 'Brachypelma smithi', '[img:16l6q7xd]http&#58;//cs424727&#46;vk&#46;me/v424727818/71a6/ncu1EvR0w1k&#46;jpg[/img:16l6q7xd]', 'fd027c9a2425284c58179379b0736587', 0, 'CA==', '16l6q7xd', 1, 0, '', 0, 0, 0, 1, 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -3153,7 +3054,7 @@ INSERT INTO `phpbb_posts` (`post_id`, `topic_id`, `forum_id`, `poster_id`, `icon
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_privmsgs` (
-  `msg_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `msg_id` mediumint(8) unsigned NOT NULL,
   `root_level` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `author_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `icon_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -3174,13 +3075,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_privmsgs` (
   `message_edit_count` smallint(4) unsigned NOT NULL DEFAULT '0',
   `to_address` text COLLATE utf8_bin NOT NULL,
   `bcc_address` text COLLATE utf8_bin NOT NULL,
-  `message_reported` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`msg_id`),
-  KEY `author_ip` (`author_ip`),
-  KEY `message_time` (`message_time`),
-  KEY `author_id` (`author_id`),
-  KEY `root_level` (`root_level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `message_reported` tinyint(1) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -3189,13 +3085,11 @@ CREATE TABLE IF NOT EXISTS `phpbb_privmsgs` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_privmsgs_folder` (
-  `folder_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `folder_id` mediumint(8) unsigned NOT NULL,
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `folder_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `pm_count` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`folder_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `pm_count` mediumint(8) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -3204,7 +3098,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_privmsgs_folder` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_privmsgs_rules` (
-  `rule_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `rule_id` mediumint(8) unsigned NOT NULL,
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `rule_check` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `rule_connection` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -3212,10 +3106,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_privmsgs_rules` (
   `rule_user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `rule_group_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `rule_action` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `rule_folder_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`rule_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `rule_folder_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -3233,10 +3125,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_privmsgs_to` (
   `pm_replied` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `pm_marked` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `pm_forwarded` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `folder_id` int(11) NOT NULL DEFAULT '0',
-  KEY `msg_id` (`msg_id`),
-  KEY `author_id` (`author_id`),
-  KEY `usr_flder_id` (`user_id`,`folder_id`)
+  `folder_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -3246,7 +3135,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_privmsgs_to` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_profile_fields` (
-  `field_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `field_id` mediumint(8) unsigned NOT NULL,
   `field_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `field_type` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `field_ident` varchar(20) COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -3269,11 +3158,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_profile_fields` (
   `field_show_on_ml` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `field_is_contact` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `field_contact_desc` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `field_contact_url` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`field_id`),
-  KEY `fld_type` (`field_type`),
-  KEY `fld_ordr` (`field_order`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=14 ;
+  `field_contact_url` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_profile_fields`
@@ -3314,8 +3200,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_profile_fields_data` (
   `pf_phpbb_website` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `pf_phpbb_wlm` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `pf_phpbb_yahoo` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `pf_phpbb_aol` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`user_id`)
+  `pf_phpbb_aol` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -3329,8 +3214,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_profile_fields_lang` (
   `lang_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `option_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `field_type` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `lang_value` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`field_id`,`lang_id`,`option_id`)
+  `lang_value` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -3344,8 +3228,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_profile_lang` (
   `lang_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `lang_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `lang_explain` text COLLATE utf8_bin NOT NULL,
-  `lang_default_value` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`field_id`,`lang_id`)
+  `lang_default_value` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -3387,13 +3270,12 @@ INSERT INTO `phpbb_profile_lang` (`field_id`, `lang_id`, `lang_name`, `lang_expl
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_ranks` (
-  `rank_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `rank_id` mediumint(8) unsigned NOT NULL,
   `rank_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `rank_min` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `rank_special` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `rank_image` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`rank_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+  `rank_image` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_ranks`
@@ -3409,7 +3291,7 @@ INSERT INTO `phpbb_ranks` (`rank_id`, `rank_title`, `rank_min`, `rank_special`, 
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_reports` (
-  `report_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `report_id` mediumint(8) unsigned NOT NULL,
   `reason_id` smallint(4) unsigned NOT NULL DEFAULT '0',
   `post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -3423,11 +3305,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_reports` (
   `reported_post_enable_magic_url` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `reported_post_text` mediumtext COLLATE utf8_bin NOT NULL,
   `reported_post_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `reported_post_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`report_id`),
-  KEY `post_id` (`post_id`),
-  KEY `pm_id` (`pm_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `reported_post_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -3436,12 +3315,11 @@ CREATE TABLE IF NOT EXISTS `phpbb_reports` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_reports_reasons` (
-  `reason_id` smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  `reason_id` smallint(4) unsigned NOT NULL,
   `reason_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `reason_description` mediumtext COLLATE utf8_bin NOT NULL,
-  `reason_order` smallint(4) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`reason_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+  `reason_order` smallint(4) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_reports_reasons`
@@ -3463,8 +3341,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_search_results` (
   `search_key` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `search_time` int(11) unsigned NOT NULL DEFAULT '0',
   `search_keywords` mediumtext COLLATE utf8_bin NOT NULL,
-  `search_authors` mediumtext COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`search_key`)
+  `search_authors` mediumtext COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -3474,14 +3351,11 @@ CREATE TABLE IF NOT EXISTS `phpbb_search_results` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_search_wordlist` (
-  `word_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `word_id` mediumint(8) unsigned NOT NULL,
   `word_text` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `word_common` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `word_count` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`word_id`),
-  UNIQUE KEY `wrd_txt` (`word_text`),
-  KEY `wrd_cnt` (`word_count`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=512 ;
+  `word_count` mediumint(8) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=595 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_search_wordlist`
@@ -3615,7 +3489,7 @@ INSERT INTO `phpbb_search_wordlist` (`word_id`, `word_text`, `word_common`, `wor
 (125, 'товарами', 0, 0),
 (126, 'которого', 0, 0),
 (127, 'сможете', 0, 0),
-(128, 'http', 0, 4),
+(128, 'http', 0, 18),
 (129, 'rayskiyepodarki', 0, 0),
 (130, 'ассортименте', 0, 0),
 (131, 'магазина', 0, 0),
@@ -3708,7 +3582,7 @@ INSERT INTO `phpbb_search_wordlist` (`word_id`, `word_text`, `word_common`, `wor
 (218, 'v622024874', 0, 1),
 (219, '16078', 0, 1),
 (220, 'iarl2pwdgxy', 0, 1),
-(221, 'jpg', 0, 2),
+(221, 'jpg', 0, 15),
 (222, 'самок', 0, 1),
 (223, 'больше', 0, 1),
 (224, 'чем', 0, 2),
@@ -3735,10 +3609,10 @@ INSERT INTO `phpbb_search_wordlist` (`word_id`, `word_text`, `word_common`, `wor
 (245, 'вдоль', 0, 1),
 (246, 'легкого', 0, 1),
 (247, 'самец', 0, 1),
-(248, 'i38', 0, 1),
-(249, 'servimg', 0, 1),
-(250, 'com', 0, 4),
-(251, 'f38', 0, 1),
+(248, 'i38', 0, 2),
+(249, 'servimg', 0, 5),
+(250, 'com', 0, 12),
+(251, 'f38', 0, 2),
 (252, 'az5yon10', 0, 1),
 (253, 'самка', 0, 2),
 (254, 'cs622717', 0, 1),
@@ -3796,7 +3670,7 @@ INSERT INTO `phpbb_search_wordlist` (`word_id`, `word_text`, `word_common`, `wor
 (306, 'методы', 0, 1),
 (307, 'птицеедов', 0, 2),
 (308, 'https', 0, 1),
-(309, 'www', 0, 1),
+(309, 'www', 0, 3),
 (310, 'youtube', 0, 1),
 (311, 'watch', 0, 1),
 (312, 'qfzcurztwkk', 0, 1),
@@ -3859,7 +3733,7 @@ INSERT INTO `phpbb_search_wordlist` (`word_id`, `word_text`, `word_common`, `wor
 (369, 'вашего', 0, 1),
 (370, 'этом', 0, 1),
 (371, 'разделе', 0, 1),
-(372, 'фото', 0, 1),
+(372, 'фото', 0, 3),
 (373, 'разворачивание', 0, 1),
 (374, 'poecilotheria', 0, 1),
 (375, 'rufilata', 0, 1),
@@ -3998,7 +3872,90 @@ INSERT INTO `phpbb_search_wordlist` (`word_id`, `word_text`, `word_common`, `wor
 (508, 'желание', 0, 0),
 (509, 'клиента', 0, 0),
 (510, 'закон', 0, 0),
-(511, 'навесы', 0, 0);
+(511, 'навесы', 0, 0),
+(512, 'i861', 0, 2),
+(513, 'photobucket', 0, 4),
+(514, 'albums', 0, 4),
+(515, 'ab171', 0, 2),
+(516, 'cassmack', 0, 2),
+(517, 'aphonopelmaanaxspermathecae', 0, 1),
+(518, 'взято', 0, 2),
+(519, 'arachnoboards', 0, 2),
+(520, 'aphonopelma', 0, 1),
+(521, 'anax', 0, 1),
+(522, 'cs403018', 0, 1),
+(523, 'v403018972', 0, 1),
+(524, 'b1a9', 0, 1),
+(525, 'm2dr5r4jzpc', 0, 1),
+(526, 'augacephalus', 0, 1),
+(527, 'breyeri', 0, 1),
+(528, 'y31', 0, 1),
+(529, 'snipes05', 0, 1),
+(530, 'tarantulas', 0, 1),
+(531, 'avicularia', 0, 4),
+(532, 'versicolor', 0, 2),
+(533, 'juvenile', 0, 1),
+(534, '20female', 0, 1),
+(535, '20kristin', 0, 1),
+(536, 'dscn1691', 0, 1),
+(537, 'imag0810', 0, 1),
+(538, 'i19', 0, 2),
+(539, 'f19', 0, 2),
+(540, 'ss0tu10', 0, 1),
+(541, 'geroldi', 0, 1),
+(542, 'cs623129', 0, 1),
+(543, 'v623129045', 0, 1),
+(544, '14ec7', 0, 1),
+(545, '6qgznck2oz0', 0, 1),
+(546, 'cs312520', 0, 1),
+(547, 'v312520972', 0, 1),
+(548, '8edc', 0, 1),
+(549, 'gl54ugytgci', 0, 1),
+(550, 'metallica', 0, 1),
+(551, 'dsc', 0, 1),
+(552, '2610', 0, 1),
+(553, 'brachypelma', 0, 10),
+(554, 'auratum', 0, 1),
+(555, 's017', 0, 1),
+(556, 'radikal', 0, 2),
+(557, 'i406', 0, 1),
+(558, '1411', 0, 2),
+(559, 'e9d6bab7cb15', 0, 1),
+(560, 'vagans', 0, 1),
+(561, 'storage6', 0, 1),
+(562, 'static', 0, 1),
+(563, 'itmages', 0, 1),
+(564, '0918', 0, 1),
+(565, '1347990495', 0, 1),
+(566, '9792631', 0, 1),
+(567, '0ecbdeb40a', 0, 1),
+(568, 'jpeg', 0, 1),
+(569, 'boehmei', 0, 1),
+(570, 'i18', 0, 2),
+(571, 'f18', 0, 2),
+(572, 'jbdqlj12', 0, 2),
+(573, 'verdezi', 0, 2),
+(574, 's50', 0, 1),
+(575, 'i129', 0, 1),
+(576, '4010693c6f97', 0, 1),
+(577, 'emilia', 0, 1),
+(578, 'img', 0, 1),
+(579, '2338', 0, 1),
+(580, 'albopilosum', 0, 1),
+(581, 'i192', 0, 1),
+(582, 'z153', 0, 1),
+(583, 'kean912', 0, 1),
+(584, 'pet', 0, 1),
+(585, '20pictures', 0, 1),
+(586, '20sabulosum', 0, 1),
+(587, 'bsabulosum00114molt', 0, 1),
+(588, 'zps9e4818f0', 0, 1),
+(589, 'sabulosum', 0, 1),
+(590, 'cs424727', 0, 1),
+(591, 'v424727818', 0, 1),
+(592, '71a6', 0, 1),
+(593, 'ncu1evr0w1k', 0, 1),
+(594, 'smithi', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -4009,10 +3966,7 @@ INSERT INTO `phpbb_search_wordlist` (`word_id`, `word_text`, `word_common`, `wor
 CREATE TABLE IF NOT EXISTS `phpbb_search_wordmatch` (
   `post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `word_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `title_match` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  UNIQUE KEY `un_mtch` (`word_id`,`post_id`,`title_match`),
-  KEY `word_id` (`word_id`),
-  KEY `post_id` (`post_id`)
+  `title_match` tinyint(1) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -4034,6 +3988,20 @@ INSERT INTO `phpbb_search_wordmatch` (`post_id`, `word_id`, `title_match`) VALUE
 (4, 105, 0),
 (4, 128, 0),
 (6, 128, 0),
+(7, 128, 0),
+(8, 128, 0),
+(9, 128, 0),
+(10, 128, 0),
+(11, 128, 0),
+(12, 128, 0),
+(13, 128, 0),
+(14, 128, 0),
+(15, 128, 0),
+(16, 128, 0),
+(17, 128, 0),
+(18, 128, 0),
+(19, 128, 0),
+(20, 128, 0),
 (4, 144, 0),
 (4, 145, 0),
 (4, 146, 0),
@@ -4126,6 +4094,19 @@ INSERT INTO `phpbb_search_wordmatch` (`post_id`, `word_id`, `title_match`) VALUE
 (4, 220, 0),
 (4, 221, 0),
 (6, 221, 0),
+(7, 221, 0),
+(8, 221, 0),
+(9, 221, 0),
+(10, 221, 0),
+(11, 221, 0),
+(12, 221, 0),
+(13, 221, 0),
+(15, 221, 0),
+(16, 221, 0),
+(17, 221, 0),
+(18, 221, 0),
+(19, 221, 0),
+(20, 221, 0),
 (4, 222, 0),
 (4, 223, 0),
 (4, 224, 0),
@@ -4153,10 +4134,24 @@ INSERT INTO `phpbb_search_wordmatch` (`post_id`, `word_id`, `title_match`) VALUE
 (4, 246, 0),
 (4, 247, 0),
 (4, 248, 0),
+(10, 248, 0),
 (4, 249, 0),
+(10, 249, 0),
+(12, 249, 0),
+(15, 249, 0),
+(16, 249, 0),
 (4, 250, 0),
 (5, 250, 0),
+(7, 250, 0),
+(9, 250, 0),
+(10, 250, 0),
+(12, 250, 0),
+(15, 250, 0),
+(16, 250, 0),
+(18, 250, 0),
+(19, 250, 0),
 (4, 251, 0),
+(10, 251, 0),
 (4, 252, 0),
 (4, 253, 0),
 (5, 253, 0),
@@ -4229,6 +4224,8 @@ INSERT INTO `phpbb_search_wordmatch` (`post_id`, `word_id`, `title_match`) VALUE
 (5, 307, 0),
 (5, 308, 0),
 (5, 309, 0),
+(7, 309, 0),
+(9, 309, 0),
 (5, 310, 0),
 (5, 311, 0),
 (5, 312, 0),
@@ -4292,6 +4289,8 @@ INSERT INTO `phpbb_search_wordmatch` (`post_id`, `word_id`, `title_match`) VALUE
 (5, 370, 0),
 (5, 371, 0),
 (5, 372, 0),
+(7, 372, 0),
+(9, 372, 0),
 (5, 373, 1),
 (5, 374, 1),
 (5, 375, 1),
@@ -4305,7 +4304,122 @@ INSERT INTO `phpbb_search_wordmatch` (`post_id`, `word_id`, `title_match`) VALUE
 (6, 383, 0),
 (6, 384, 0),
 (6, 385, 1),
-(6, 386, 1);
+(6, 386, 1),
+(7, 512, 0),
+(18, 512, 0),
+(7, 513, 0),
+(9, 513, 0),
+(18, 513, 0),
+(19, 513, 0),
+(7, 514, 0),
+(9, 514, 0),
+(18, 514, 0),
+(19, 514, 0),
+(7, 515, 0),
+(18, 515, 0),
+(7, 516, 0),
+(18, 516, 0),
+(7, 517, 0),
+(7, 518, 0),
+(9, 518, 0),
+(7, 519, 0),
+(9, 519, 0),
+(7, 520, 1),
+(7, 521, 1),
+(8, 522, 0),
+(8, 523, 0),
+(8, 524, 0),
+(8, 525, 0),
+(8, 526, 1),
+(8, 527, 1),
+(9, 528, 0),
+(9, 529, 0),
+(9, 530, 0),
+(9, 531, 0),
+(9, 531, 1),
+(10, 531, 1),
+(11, 531, 1),
+(9, 532, 0),
+(9, 532, 1),
+(9, 533, 0),
+(9, 534, 0),
+(9, 535, 0),
+(9, 536, 0),
+(10, 537, 0),
+(10, 538, 0),
+(12, 538, 0),
+(10, 539, 0),
+(12, 539, 0),
+(10, 540, 0),
+(10, 541, 1),
+(11, 542, 0),
+(11, 543, 0),
+(11, 544, 0),
+(11, 545, 0),
+(11, 546, 0),
+(11, 547, 0),
+(11, 548, 0),
+(11, 549, 0),
+(11, 550, 1),
+(12, 551, 0),
+(12, 552, 0),
+(12, 553, 1),
+(13, 553, 1),
+(14, 553, 1),
+(15, 553, 1),
+(16, 553, 1),
+(17, 553, 1),
+(18, 553, 1),
+(19, 553, 0),
+(19, 553, 1),
+(20, 553, 1),
+(12, 554, 1),
+(13, 555, 0),
+(13, 556, 0),
+(17, 556, 0),
+(13, 557, 0),
+(13, 558, 0),
+(17, 558, 0),
+(13, 559, 0),
+(13, 560, 1),
+(14, 561, 0),
+(14, 562, 0),
+(14, 563, 0),
+(14, 564, 0),
+(14, 565, 0),
+(14, 566, 0),
+(14, 567, 0),
+(14, 568, 0),
+(14, 569, 1),
+(15, 570, 0),
+(16, 570, 0),
+(15, 571, 0),
+(16, 571, 0),
+(15, 572, 0),
+(16, 572, 0),
+(15, 573, 1),
+(16, 573, 1),
+(17, 574, 0),
+(17, 575, 0),
+(17, 576, 0),
+(17, 577, 1),
+(18, 578, 0),
+(18, 579, 0),
+(18, 580, 1),
+(19, 581, 0),
+(19, 582, 0),
+(19, 583, 0),
+(19, 584, 0),
+(19, 585, 0),
+(19, 586, 0),
+(19, 587, 0),
+(19, 588, 0),
+(19, 589, 1),
+(20, 590, 0),
+(20, 591, 0),
+(20, 592, 0),
+(20, 593, 0),
+(20, 594, 1);
 
 -- --------------------------------------------------------
 
@@ -4326,11 +4440,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_sessions` (
   `session_viewonline` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `session_autologin` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `session_admin` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `session_forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`session_id`),
-  KEY `session_time` (`session_time`),
-  KEY `session_user_id` (`session_user_id`),
-  KEY `session_fid` (`session_forum_id`)
+  `session_forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -4338,13 +4448,8 @@ CREATE TABLE IF NOT EXISTS `phpbb_sessions` (
 --
 
 INSERT INTO `phpbb_sessions` (`session_id`, `session_user_id`, `session_last_visit`, `session_start`, `session_time`, `session_ip`, `session_browser`, `session_forwarded_for`, `session_page`, `session_viewonline`, `session_autologin`, `session_admin`, `session_forum_id`) VALUES
-('13a8e7ed400858a580d8a0381c14cc97', 1, 1463492899, 1463492899, 1463492899, '195.211.23.218', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36', '', 'index.php', 1, 0, 0, 0),
-('23ae66c0c4f9b5c8c5cd324ca304f883', 1, 1463492899, 1463492899, 1463492899, '95.213.6.21', 'Mozilla/5.0 (compatible; vkShare; +http://vk.com/dev/Share)', '', 'index.php', 1, 0, 0, 0),
-('4096a8928c6415d07e63f626a3a14c27', 1, 1463493037, 1463493037, 1463493037, '87.240.177.118', 'Mozilla/5.0 (compatible; vkShare; +http://vk.com/dev/Share)', '', 'app.php/act?ak=5b76a1b4d4c&u=3', 1, 0, 0, 0),
-('b0a2bd55d78bf1b4a1eb5df2abc01678', 1, 1463493037, 1463493037, 1463493037, '87.240.177.118', 'Mozilla/5.0 (compatible; vkShare; +http://vk.com/dev/Share)', '', 'app.php/act?ak=5b76a1b4d4c&u=3', 1, 0, 0, 0),
-('cdca57c0001ee71e5b8bd24b67999699', 1, 1463492939, 1463492939, 1463493557, '81.177.127.140', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36', '', 'app.php/act?ak=5b76a1b4d4c&u=3', 1, 0, 0, 0),
-('d84fa695f19d455e72b00414f0dda518', 1, 1463492899, 1463492899, 1463492899, '195.211.23.219', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36', '', 'app.php/favicon.ico', 1, 0, 0, 0),
-('d8f9dfeb38d29171edbccfc6504dbccb', 2, 1463480648, 1463491161, 1463492889, '46.173.34.207', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36', '', 'index.php', 1, 0, 1, 0);
+('7f10311d691657b45a32662eb7288f89', 1, 1467019912, 1467019912, 1467019912, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36', '', 'app.php/favicon.ico', 1, 0, 0, 0),
+('ddaff7d387d4beb63432a0484a8f8ec3', 1, 1467023421, 1467023421, 1467023422, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36', '', 'index.php', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -4356,9 +4461,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_sessions_keys` (
   `key_id` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `last_ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `last_login` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`key_id`,`user_id`),
-  KEY `last_login` (`last_login`)
+  `last_login` int(11) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -4368,12 +4471,11 @@ CREATE TABLE IF NOT EXISTS `phpbb_sessions_keys` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_sitelist` (
-  `site_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `site_id` mediumint(8) unsigned NOT NULL,
   `site_ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
   `site_hostname` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `ip_exclude` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`site_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `ip_exclude` tinyint(1) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -4382,17 +4484,15 @@ CREATE TABLE IF NOT EXISTS `phpbb_sitelist` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_smilies` (
-  `smiley_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `smiley_id` mediumint(8) unsigned NOT NULL,
   `code` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
   `emotion` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
   `smiley_url` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
   `smiley_width` smallint(4) unsigned NOT NULL DEFAULT '0',
   `smiley_height` smallint(4) unsigned NOT NULL DEFAULT '0',
   `smiley_order` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `display_on_posting` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`smiley_id`),
-  KEY `display_on_post` (`display_on_posting`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=43 ;
+  `display_on_posting` tinyint(1) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_smilies`
@@ -4449,17 +4549,15 @@ INSERT INTO `phpbb_smilies` (`smiley_id`, `code`, `emotion`, `smiley_url`, `smil
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_styles` (
-  `style_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `style_id` mediumint(8) unsigned NOT NULL,
   `style_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `style_copyright` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `style_active` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `style_path` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `bbcode_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'kNg=',
   `style_parent_id` int(4) unsigned NOT NULL DEFAULT '0',
-  `style_parent_tree` text COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`style_id`),
-  UNIQUE KEY `style_name` (`style_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+  `style_parent_tree` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_styles`
@@ -4475,13 +4573,12 @@ INSERT INTO `phpbb_styles` (`style_id`, `style_name`, `style_copyright`, `style_
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_teampage` (
-  `teampage_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `teampage_id` mediumint(8) unsigned NOT NULL,
   `group_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `teampage_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `teampage_position` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `teampage_parent` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`teampage_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+  `teampage_parent` mediumint(8) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_teampage`
@@ -4498,7 +4595,7 @@ INSERT INTO `phpbb_teampage` (`teampage_id`, `group_id`, `teampage_name`, `teamp
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_topics` (
-  `topic_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `topic_id` mediumint(8) unsigned NOT NULL,
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `icon_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_attachment` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -4535,24 +4632,31 @@ CREATE TABLE IF NOT EXISTS `phpbb_topics` (
   `topic_delete_user` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_posts_approved` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_posts_unapproved` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `topic_posts_softdeleted` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`topic_id`),
-  KEY `forum_id` (`forum_id`),
-  KEY `forum_id_type` (`forum_id`,`topic_type`),
-  KEY `last_post_time` (`topic_last_post_time`),
-  KEY `fid_time_moved` (`forum_id`,`topic_last_post_time`,`topic_moved_id`),
-  KEY `topic_visibility` (`topic_visibility`),
-  KEY `forum_vis_last` (`forum_id`,`topic_visibility`,`topic_last_post_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+  `topic_posts_softdeleted` mediumint(8) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_topics`
 --
 
 INSERT INTO `phpbb_topics` (`topic_id`, `forum_id`, `icon_id`, `topic_attachment`, `topic_reported`, `topic_title`, `topic_poster`, `topic_time`, `topic_time_limit`, `topic_views`, `topic_status`, `topic_type`, `topic_first_post_id`, `topic_first_poster_name`, `topic_first_poster_colour`, `topic_last_post_id`, `topic_last_poster_id`, `topic_last_poster_name`, `topic_last_poster_colour`, `topic_last_post_subject`, `topic_last_post_time`, `topic_last_view_time`, `topic_moved_id`, `topic_bumped`, `topic_bumper`, `poll_title`, `poll_start`, `poll_length`, `poll_max_options`, `poll_last_vote`, `poll_vote_change`, `topic_visibility`, `topic_delete_time`, `topic_delete_reason`, `topic_delete_user`, `topic_posts_approved`, `topic_posts_unapproved`, `topic_posts_softdeleted`) VALUES
-(4, 13, 0, 0, 0, 'Методы определения пола пауков - птицеедов', 2, 1463400650, 0, 2, 0, 0, 4, 'stanruss', 'AA0000', 4, 2, 'stanruss', 'AA0000', 'Методы определения пола пауков - птицеедов', 1463400650, 1463400732, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
-(5, 14, 0, 0, 0, 'Разворачивание экзувия Poecilotheria rufilata L5 для определения пола', 2, 1463401003, 0, 2, 0, 0, 5, 'stanruss', 'AA0000', 5, 2, 'stanruss', 'AA0000', 'Разворачивание экзувия Poecilotheria rufilata L5 для определения пола', 1463401003, 1463491358, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
-(6, 16, 0, 0, 0, 'Acanthoscurria geniculata', 2, 1463402454, 0, 3, 0, 0, 6, 'stanruss', 'AA0000', 6, 2, 'stanruss', 'AA0000', 'Acanthoscurria geniculata', 1463402454, 1463402713, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0);
+(4, 13, 0, 0, 0, 'Методы определения пола пауков - птицеедов', 2, 1463400650, 0, 4, 0, 0, 4, 'stanruss', 'AA0000', 4, 2, 'stanruss', 'AA0000', 'Методы определения пола пауков - птицеедов', 1463400650, 1467022708, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(5, 14, 0, 0, 0, 'Разворачивание экзувия Poecilotheria rufilata L5 для определения пола', 2, 1463401003, 0, 3, 0, 0, 5, 'stanruss', 'AA0000', 5, 2, 'stanruss', 'AA0000', 'Разворачивание экзувия Poecilotheria rufilata L5 для определения пола', 1463401003, 1465899840, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(6, 16, 0, 0, 0, 'Acanthoscurria geniculata', 2, 1463402454, 0, 4, 0, 0, 6, 'stanruss', 'AA0000', 6, 2, 'stanruss', 'AA0000', 'Acanthoscurria geniculata', 1463402454, 1464790677, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(7, 17, 0, 0, 0, 'Aphonopelma anax', 2, 1465899974, 0, 2, 0, 0, 7, 'stanruss', 'AA0000', 7, 2, 'stanruss', 'AA0000', 'Aphonopelma anax', 1465899974, 1465900268, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(8, 18, 0, 0, 0, 'Augacephalus breyeri', 2, 1465900397, 0, 2, 0, 0, 8, 'stanruss', 'AA0000', 8, 2, 'stanruss', 'AA0000', 'Augacephalus breyeri', 1465900397, 1465900484, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(9, 19, 0, 0, 0, 'Avicularia versicolor', 2, 1465900633, 0, 1, 0, 0, 9, 'stanruss', 'AA0000', 9, 2, 'stanruss', 'AA0000', 'Avicularia versicolor', 1465900633, 1465900633, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(10, 19, 0, 0, 0, 'Avicularia geroldi', 2, 1465900731, 0, 1, 0, 0, 10, 'stanruss', 'AA0000', 10, 2, 'stanruss', 'AA0000', 'Avicularia geroldi', 1465900731, 1465900732, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(11, 19, 0, 0, 0, 'Avicularia metallica', 2, 1465900794, 0, 1, 0, 0, 11, 'stanruss', 'AA0000', 11, 2, 'stanruss', 'AA0000', 'Avicularia metallica', 1465900794, 1465900794, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(12, 20, 0, 0, 0, 'Brachypelma auratum', 2, 1467022855, 0, 1, 0, 0, 12, 'stanruss', 'AA0000', 12, 2, 'stanruss', 'AA0000', 'Brachypelma auratum', 1467022855, 1467022855, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(13, 20, 0, 0, 0, 'Brachypelma vagans', 2, 1467022896, 0, 1, 0, 0, 13, 'stanruss', 'AA0000', 13, 2, 'stanruss', 'AA0000', 'Brachypelma vagans', 1467022896, 1467022897, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(14, 20, 0, 0, 0, 'Brachypelma boehmei', 2, 1467023009, 0, 1, 0, 0, 14, 'stanruss', 'AA0000', 14, 2, 'stanruss', 'AA0000', 'Brachypelma boehmei', 1467023009, 1467023009, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(15, 20, 0, 0, 0, 'Brachypelma verdezi', 2, 1467023043, 0, 1, 0, 0, 15, 'stanruss', 'AA0000', 15, 2, 'stanruss', 'AA0000', 'Brachypelma verdezi', 1467023043, 1467023044, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(16, 20, 0, 0, 0, 'Brachypelma verdezi', 2, 1467023044, 0, 1, 0, 0, 16, 'stanruss', 'AA0000', 16, 2, 'stanruss', 'AA0000', 'Brachypelma verdezi', 1467023044, 1467023044, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(17, 20, 0, 0, 0, 'Brachypelma emilia', 2, 1467023096, 0, 1, 0, 0, 17, 'stanruss', 'AA0000', 17, 2, 'stanruss', 'AA0000', 'Brachypelma emilia', 1467023096, 1467023097, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(18, 20, 0, 0, 0, 'Brachypelma albopilosum', 2, 1467023144, 0, 1, 0, 0, 18, 'stanruss', 'AA0000', 18, 2, 'stanruss', 'AA0000', 'Brachypelma albopilosum', 1467023144, 1467023144, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(19, 20, 0, 0, 0, 'Brachypelma sabulosum', 2, 1467023180, 0, 1, 0, 0, 19, 'stanruss', 'AA0000', 19, 2, 'stanruss', 'AA0000', 'Brachypelma sabulosum', 1467023180, 1467023181, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0),
+(20, 20, 0, 0, 0, 'Brachypelma smithi', 2, 1467023259, 0, 1, 0, 0, 20, 'stanruss', 'AA0000', 20, 2, 'stanruss', 'AA0000', 'Brachypelma smithi', 1467023259, 1467023259, 0, 0, 0, '', 0, 0, 1, 0, 0, 1, 0, '', 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -4563,8 +4667,7 @@ INSERT INTO `phpbb_topics` (`topic_id`, `forum_id`, `icon_id`, `topic_attachment
 CREATE TABLE IF NOT EXISTS `phpbb_topics_posted` (
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `topic_posted` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_id`,`topic_id`)
+  `topic_posted` tinyint(1) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -4574,7 +4677,21 @@ CREATE TABLE IF NOT EXISTS `phpbb_topics_posted` (
 INSERT INTO `phpbb_topics_posted` (`user_id`, `topic_id`, `topic_posted`) VALUES
 (2, 4, 1),
 (2, 5, 1),
-(2, 6, 1);
+(2, 6, 1),
+(2, 7, 1),
+(2, 8, 1),
+(2, 9, 1),
+(2, 10, 1),
+(2, 11, 1),
+(2, 12, 1),
+(2, 13, 1),
+(2, 14, 1),
+(2, 15, 1),
+(2, 16, 1),
+(2, 17, 1),
+(2, 18, 1),
+(2, 19, 1),
+(2, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -4586,10 +4703,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_topics_track` (
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `forum_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `mark_time` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_id`,`topic_id`),
-  KEY `forum_id` (`forum_id`),
-  KEY `topic_id` (`topic_id`)
+  `mark_time` int(11) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -4599,7 +4713,11 @@ CREATE TABLE IF NOT EXISTS `phpbb_topics_track` (
 INSERT INTO `phpbb_topics_track` (`user_id`, `topic_id`, `forum_id`, `mark_time`) VALUES
 (2, 4, 13, 1463400650),
 (2, 5, 14, 1463401003),
-(2, 6, 16, 1463402454);
+(2, 6, 16, 1463402454),
+(2, 7, 17, 1465899974),
+(2, 8, 18, 1465900397),
+(2, 11, 19, 1465900794),
+(2, 20, 20, 1467023259);
 
 -- --------------------------------------------------------
 
@@ -4610,10 +4728,7 @@ INSERT INTO `phpbb_topics_track` (`user_id`, `topic_id`, `forum_id`, `mark_time`
 CREATE TABLE IF NOT EXISTS `phpbb_topics_watch` (
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `notify_status` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  KEY `topic_id` (`topic_id`),
-  KEY `user_id` (`user_id`),
-  KEY `notify_stat` (`notify_status`)
+  `notify_status` tinyint(1) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -4623,7 +4738,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_topics_watch` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_users` (
-  `user_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` mediumint(8) unsigned NOT NULL,
   `user_type` tinyint(2) NOT NULL DEFAULT '0',
   `group_id` mediumint(8) unsigned NOT NULL DEFAULT '3',
   `user_permissions` mediumtext COLLATE utf8_bin NOT NULL,
@@ -4688,21 +4803,16 @@ CREATE TABLE IF NOT EXISTS `phpbb_users` (
   `user_form_salt` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `user_new` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `user_reminded` tinyint(4) NOT NULL DEFAULT '0',
-  `user_reminded_time` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username_clean` (`username_clean`),
-  KEY `user_birthday` (`user_birthday`),
-  KEY `user_email_hash` (`user_email_hash`),
-  KEY `user_type` (`user_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=57 ;
+  `user_reminded_time` int(11) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `phpbb_users`
 --
 
 INSERT INTO `phpbb_users` (`user_id`, `user_type`, `group_id`, `user_permissions`, `user_perm_from`, `user_ip`, `user_regdate`, `username`, `username_clean`, `user_password`, `user_passchg`, `user_email`, `user_email_hash`, `user_birthday`, `user_lastvisit`, `user_lastmark`, `user_lastpost_time`, `user_lastpage`, `user_last_confirm_key`, `user_last_search`, `user_warnings`, `user_last_warning`, `user_login_attempts`, `user_inactive_reason`, `user_inactive_time`, `user_posts`, `user_lang`, `user_timezone`, `user_dateformat`, `user_style`, `user_rank`, `user_colour`, `user_new_privmsg`, `user_unread_privmsg`, `user_last_privmsg`, `user_message_rules`, `user_full_folder`, `user_emailtime`, `user_topic_show_days`, `user_topic_sortby_type`, `user_topic_sortby_dir`, `user_post_show_days`, `user_post_sortby_type`, `user_post_sortby_dir`, `user_notify`, `user_notify_pm`, `user_notify_type`, `user_allow_pm`, `user_allow_viewonline`, `user_allow_viewemail`, `user_allow_massemail`, `user_options`, `user_avatar`, `user_avatar_type`, `user_avatar_width`, `user_avatar_height`, `user_sig`, `user_sig_bbcode_uid`, `user_sig_bbcode_bitfield`, `user_jabber`, `user_actkey`, `user_newpasswd`, `user_form_salt`, `user_new`, `user_reminded`, `user_reminded_time`) VALUES
-(1, 2, 1, '00000000000g13ydq8\ni1cjyo000000\ni1cjyo000000\n\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000', 0, '', 1461935214, 'Anonymous', 'anonymous', '', 0, '', 0, '', 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 'en', '', 'd M Y H:i', 1, 0, '', 0, 0, 0, 0, -3, 0, 0, 't', 'd', 0, 't', 'a', 0, 1, 0, 1, 1, 1, 0, 230271, '', '', 0, 0, '', '', '', '', '', '', '112fc20456646e6b', 1, 0, 0),
-(2, 3, 5, 'zik0zjzik0zjzik0zg\ni1cjyo000000\nzik0zjzi8sg0\n\ni1cjyo000000\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0', 0, '46.173.34.207', 1461935214, 'stanruss', 'stanruss', '$2y$10$lQwK4wJsSN6ldiJk./0bPeSvtxQk1tLwkO7tra00p8yfk3EfjYG6y', 0, 'stan19781@gmail.com', 307781185819, '', 1463480648, 0, 1463402454, 'memberlist.php?field=username&form=select_user&mode=searchuser&select_single=true', '', 0, 0, 0, 0, 0, 0, 3, 'ru', '', '|d M Y|, H:i', 1, 1, 'AA0000', 0, 0, 0, 0, -3, 0, 0, 't', 'd', 0, 't', 'a', 0, 1, 0, 1, 1, 1, 1, 230271, '', '', 0, 0, '', '', '', '', '', '', '30f70c35f4d82ff2', 0, 0, 0),
+(1, 2, 1, '00000000000g13ydq8\ni1cjyo000000\ni1cjyo000000\n\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000', 0, '', 1461935214, 'Anonymous', 'anonymous', '', 0, '', 0, '', 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 'en', '', 'd M Y H:i', 1, 0, '', 0, 0, 0, 0, -3, 0, 0, 't', 'd', 0, 't', 'a', 0, 1, 0, 1, 1, 1, 0, 230271, '', '', 0, 0, '', '', '', '', '', '', '018b04ffcd997bbd', 1, 0, 0),
+(2, 3, 5, 'zik0zjzik0zjzik0zg\ni1cjyo000000\nzik0zjzi8sg0\n\ni1cjyo000000\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\ni1cjyo000000\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0\nzik0zjzi8sg0', 0, '46.173.34.207', 1461935214, 'stanruss', 'stanruss', '$2y$10$lQwK4wJsSN6ldiJk./0bPeSvtxQk1tLwkO7tra00p8yfk3EfjYG6y', 0, 'stan19781@gmail.com', 307781185819, '', 1467023397, 0, 1467023259, 'viewforum.php?f=15', '', 0, 0, 0, 0, 0, 0, 17, 'ru', '', '|d M Y|, H:i', 1, 1, 'AA0000', 0, 0, 0, 0, -3, 0, 0, 't', 'd', 0, 't', 'a', 0, 1, 0, 1, 1, 1, 1, 230271, '', '', 0, 0, '', '', '', '', '', '', '67dc9010b6b2d504', 0, 0, 0),
 (3, 2, 6, '', 0, '', 1461935274, 'AdsBot [Google]', 'adsbot [google]', '', 1461935274, '', 0, '', 0, 1461935274, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 'ru', 'UTC', '|d M Y|, H:i', 1, 0, '9E8DA7', 0, 0, 0, 0, -3, 0, 0, 't', 'd', 0, 't', 'a', 0, 1, 0, 0, 1, 1, 0, 230271, '', '', 0, 0, '', '', '', '', '', '', '24ba2df1fb7186f9', 0, 0, 0),
 (4, 2, 6, '', 0, '', 1461935274, 'Alexa [Bot]', 'alexa [bot]', '', 1461935274, '', 0, '', 0, 1461935274, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 'ru', 'UTC', '|d M Y|, H:i', 1, 0, '9E8DA7', 0, 0, 0, 0, -3, 0, 0, 't', 'd', 0, 't', 'a', 0, 1, 0, 0, 1, 1, 0, 230271, '', '', 0, 0, '', '', '', '', '', '', '531d222951be58de', 0, 0, 0),
 (5, 2, 6, '', 0, '', 1461935274, 'Alta Vista [Bot]', 'alta vista [bot]', '', 1461935274, '', 0, '', 0, 1461935274, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 'ru', 'UTC', '|d M Y|, H:i', 1, 0, '9E8DA7', 0, 0, 0, 0, -3, 0, 0, 't', 'd', 0, 't', 'a', 0, 1, 0, 0, 1, 1, 0, 230271, '', '', 0, 0, '', '', '', '', '', '', 'a4e926539a4bcd63', 0, 0, 0),
@@ -4764,10 +4874,7 @@ CREATE TABLE IF NOT EXISTS `phpbb_user_group` (
   `group_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `group_leader` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `user_pending` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  KEY `group_id` (`group_id`),
-  KEY `user_id` (`user_id`),
-  KEY `group_leader` (`group_leader`)
+  `user_pending` tinyint(1) unsigned NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -5082,13 +5189,12 @@ INSERT INTO `phpbb_user_notifications` (`item_type`, `item_id`, `user_id`, `meth
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_warnings` (
-  `warning_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `warning_id` mediumint(8) unsigned NOT NULL,
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `log_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `warning_time` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`warning_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `warning_time` int(11) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -5097,11 +5203,10 @@ CREATE TABLE IF NOT EXISTS `phpbb_warnings` (
 --
 
 CREATE TABLE IF NOT EXISTS `phpbb_words` (
-  `word_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `word_id` mediumint(8) unsigned NOT NULL,
   `word` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `replacement` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`word_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `replacement` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -5113,10 +5218,676 @@ CREATE TABLE IF NOT EXISTS `phpbb_zebra` (
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `zebra_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `friend` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `foe` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_id`,`zebra_id`)
+  `foe` tinyint(1) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `phpbb_acl_groups`
+--
+ALTER TABLE `phpbb_acl_groups`
+  ADD KEY `group_id` (`group_id`),
+  ADD KEY `auth_opt_id` (`auth_option_id`),
+  ADD KEY `auth_role_id` (`auth_role_id`);
+
+--
+-- Индексы таблицы `phpbb_acl_options`
+--
+ALTER TABLE `phpbb_acl_options`
+  ADD PRIMARY KEY (`auth_option_id`),
+  ADD UNIQUE KEY `auth_option` (`auth_option`);
+
+--
+-- Индексы таблицы `phpbb_acl_roles`
+--
+ALTER TABLE `phpbb_acl_roles`
+  ADD PRIMARY KEY (`role_id`),
+  ADD KEY `role_type` (`role_type`),
+  ADD KEY `role_order` (`role_order`);
+
+--
+-- Индексы таблицы `phpbb_acl_roles_data`
+--
+ALTER TABLE `phpbb_acl_roles_data`
+  ADD PRIMARY KEY (`role_id`,`auth_option_id`),
+  ADD KEY `ath_op_id` (`auth_option_id`);
+
+--
+-- Индексы таблицы `phpbb_acl_users`
+--
+ALTER TABLE `phpbb_acl_users`
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `auth_option_id` (`auth_option_id`),
+  ADD KEY `auth_role_id` (`auth_role_id`);
+
+--
+-- Индексы таблицы `phpbb_attachments`
+--
+ALTER TABLE `phpbb_attachments`
+  ADD PRIMARY KEY (`attach_id`),
+  ADD KEY `filetime` (`filetime`),
+  ADD KEY `post_msg_id` (`post_msg_id`),
+  ADD KEY `topic_id` (`topic_id`),
+  ADD KEY `poster_id` (`poster_id`),
+  ADD KEY `is_orphan` (`is_orphan`);
+
+--
+-- Индексы таблицы `phpbb_banlist`
+--
+ALTER TABLE `phpbb_banlist`
+  ADD PRIMARY KEY (`ban_id`),
+  ADD KEY `ban_end` (`ban_end`),
+  ADD KEY `ban_user` (`ban_userid`,`ban_exclude`),
+  ADD KEY `ban_email` (`ban_email`,`ban_exclude`),
+  ADD KEY `ban_ip` (`ban_ip`,`ban_exclude`);
+
+--
+-- Индексы таблицы `phpbb_bbcodes`
+--
+ALTER TABLE `phpbb_bbcodes`
+  ADD PRIMARY KEY (`bbcode_id`),
+  ADD KEY `display_on_post` (`display_on_posting`);
+
+--
+-- Индексы таблицы `phpbb_bookmarks`
+--
+ALTER TABLE `phpbb_bookmarks`
+  ADD PRIMARY KEY (`topic_id`,`user_id`);
+
+--
+-- Индексы таблицы `phpbb_bots`
+--
+ALTER TABLE `phpbb_bots`
+  ADD PRIMARY KEY (`bot_id`),
+  ADD KEY `bot_active` (`bot_active`);
+
+--
+-- Индексы таблицы `phpbb_config`
+--
+ALTER TABLE `phpbb_config`
+  ADD PRIMARY KEY (`config_name`),
+  ADD KEY `is_dynamic` (`is_dynamic`);
+
+--
+-- Индексы таблицы `phpbb_config_text`
+--
+ALTER TABLE `phpbb_config_text`
+  ADD PRIMARY KEY (`config_name`);
+
+--
+-- Индексы таблицы `phpbb_confirm`
+--
+ALTER TABLE `phpbb_confirm`
+  ADD PRIMARY KEY (`session_id`,`confirm_id`),
+  ADD KEY `confirm_type` (`confirm_type`);
+
+--
+-- Индексы таблицы `phpbb_disallow`
+--
+ALTER TABLE `phpbb_disallow`
+  ADD PRIMARY KEY (`disallow_id`);
+
+--
+-- Индексы таблицы `phpbb_drafts`
+--
+ALTER TABLE `phpbb_drafts`
+  ADD PRIMARY KEY (`draft_id`),
+  ADD KEY `save_time` (`save_time`);
+
+--
+-- Индексы таблицы `phpbb_ext`
+--
+ALTER TABLE `phpbb_ext`
+  ADD UNIQUE KEY `ext_name` (`ext_name`);
+
+--
+-- Индексы таблицы `phpbb_extensions`
+--
+ALTER TABLE `phpbb_extensions`
+  ADD PRIMARY KEY (`extension_id`);
+
+--
+-- Индексы таблицы `phpbb_extension_groups`
+--
+ALTER TABLE `phpbb_extension_groups`
+  ADD PRIMARY KEY (`group_id`);
+
+--
+-- Индексы таблицы `phpbb_forums`
+--
+ALTER TABLE `phpbb_forums`
+  ADD PRIMARY KEY (`forum_id`),
+  ADD KEY `left_right_id` (`left_id`,`right_id`),
+  ADD KEY `forum_lastpost_id` (`forum_last_post_id`);
+
+--
+-- Индексы таблицы `phpbb_forums_access`
+--
+ALTER TABLE `phpbb_forums_access`
+  ADD PRIMARY KEY (`forum_id`,`user_id`,`session_id`);
+
+--
+-- Индексы таблицы `phpbb_forums_track`
+--
+ALTER TABLE `phpbb_forums_track`
+  ADD PRIMARY KEY (`user_id`,`forum_id`);
+
+--
+-- Индексы таблицы `phpbb_forums_watch`
+--
+ALTER TABLE `phpbb_forums_watch`
+  ADD KEY `forum_id` (`forum_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `notify_stat` (`notify_status`);
+
+--
+-- Индексы таблицы `phpbb_groups`
+--
+ALTER TABLE `phpbb_groups`
+  ADD PRIMARY KEY (`group_id`),
+  ADD KEY `group_legend_name` (`group_legend`,`group_name`);
+
+--
+-- Индексы таблицы `phpbb_icons`
+--
+ALTER TABLE `phpbb_icons`
+  ADD PRIMARY KEY (`icons_id`),
+  ADD KEY `display_on_posting` (`display_on_posting`);
+
+--
+-- Индексы таблицы `phpbb_lang`
+--
+ALTER TABLE `phpbb_lang`
+  ADD PRIMARY KEY (`lang_id`),
+  ADD KEY `lang_iso` (`lang_iso`);
+
+--
+-- Индексы таблицы `phpbb_log`
+--
+ALTER TABLE `phpbb_log`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `log_type` (`log_type`),
+  ADD KEY `forum_id` (`forum_id`),
+  ADD KEY `topic_id` (`topic_id`),
+  ADD KEY `reportee_id` (`reportee_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Индексы таблицы `phpbb_login_attempts`
+--
+ALTER TABLE `phpbb_login_attempts`
+  ADD KEY `att_ip` (`attempt_ip`,`attempt_time`),
+  ADD KEY `att_for` (`attempt_forwarded_for`,`attempt_time`),
+  ADD KEY `att_time` (`attempt_time`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Индексы таблицы `phpbb_migrations`
+--
+ALTER TABLE `phpbb_migrations`
+  ADD PRIMARY KEY (`migration_name`);
+
+--
+-- Индексы таблицы `phpbb_moderator_cache`
+--
+ALTER TABLE `phpbb_moderator_cache`
+  ADD KEY `disp_idx` (`display_on_index`),
+  ADD KEY `forum_id` (`forum_id`);
+
+--
+-- Индексы таблицы `phpbb_modules`
+--
+ALTER TABLE `phpbb_modules`
+  ADD PRIMARY KEY (`module_id`),
+  ADD KEY `left_right_id` (`left_id`,`right_id`),
+  ADD KEY `module_enabled` (`module_enabled`),
+  ADD KEY `class_left_id` (`module_class`,`left_id`);
+
+--
+-- Индексы таблицы `phpbb_notifications`
+--
+ALTER TABLE `phpbb_notifications`
+  ADD PRIMARY KEY (`notification_id`),
+  ADD KEY `item_ident` (`notification_type_id`,`item_id`),
+  ADD KEY `user` (`user_id`,`notification_read`);
+
+--
+-- Индексы таблицы `phpbb_notification_types`
+--
+ALTER TABLE `phpbb_notification_types`
+  ADD PRIMARY KEY (`notification_type_id`),
+  ADD UNIQUE KEY `type` (`notification_type_name`);
+
+--
+-- Индексы таблицы `phpbb_oauth_accounts`
+--
+ALTER TABLE `phpbb_oauth_accounts`
+  ADD PRIMARY KEY (`user_id`,`provider`);
+
+--
+-- Индексы таблицы `phpbb_oauth_tokens`
+--
+ALTER TABLE `phpbb_oauth_tokens`
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `provider` (`provider`);
+
+--
+-- Индексы таблицы `phpbb_poll_options`
+--
+ALTER TABLE `phpbb_poll_options`
+  ADD KEY `poll_opt_id` (`poll_option_id`),
+  ADD KEY `topic_id` (`topic_id`);
+
+--
+-- Индексы таблицы `phpbb_poll_votes`
+--
+ALTER TABLE `phpbb_poll_votes`
+  ADD KEY `topic_id` (`topic_id`),
+  ADD KEY `vote_user_id` (`vote_user_id`),
+  ADD KEY `vote_user_ip` (`vote_user_ip`);
+
+--
+-- Индексы таблицы `phpbb_posts`
+--
+ALTER TABLE `phpbb_posts`
+  ADD PRIMARY KEY (`post_id`),
+  ADD KEY `forum_id` (`forum_id`),
+  ADD KEY `topic_id` (`topic_id`),
+  ADD KEY `poster_ip` (`poster_ip`),
+  ADD KEY `poster_id` (`poster_id`),
+  ADD KEY `tid_post_time` (`topic_id`,`post_time`),
+  ADD KEY `post_username` (`post_username`),
+  ADD KEY `post_visibility` (`post_visibility`);
+
+--
+-- Индексы таблицы `phpbb_privmsgs`
+--
+ALTER TABLE `phpbb_privmsgs`
+  ADD PRIMARY KEY (`msg_id`),
+  ADD KEY `author_ip` (`author_ip`),
+  ADD KEY `message_time` (`message_time`),
+  ADD KEY `author_id` (`author_id`),
+  ADD KEY `root_level` (`root_level`);
+
+--
+-- Индексы таблицы `phpbb_privmsgs_folder`
+--
+ALTER TABLE `phpbb_privmsgs_folder`
+  ADD PRIMARY KEY (`folder_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Индексы таблицы `phpbb_privmsgs_rules`
+--
+ALTER TABLE `phpbb_privmsgs_rules`
+  ADD PRIMARY KEY (`rule_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Индексы таблицы `phpbb_privmsgs_to`
+--
+ALTER TABLE `phpbb_privmsgs_to`
+  ADD KEY `msg_id` (`msg_id`),
+  ADD KEY `author_id` (`author_id`),
+  ADD KEY `usr_flder_id` (`user_id`,`folder_id`);
+
+--
+-- Индексы таблицы `phpbb_profile_fields`
+--
+ALTER TABLE `phpbb_profile_fields`
+  ADD PRIMARY KEY (`field_id`),
+  ADD KEY `fld_type` (`field_type`),
+  ADD KEY `fld_ordr` (`field_order`);
+
+--
+-- Индексы таблицы `phpbb_profile_fields_data`
+--
+ALTER TABLE `phpbb_profile_fields_data`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Индексы таблицы `phpbb_profile_fields_lang`
+--
+ALTER TABLE `phpbb_profile_fields_lang`
+  ADD PRIMARY KEY (`field_id`,`lang_id`,`option_id`);
+
+--
+-- Индексы таблицы `phpbb_profile_lang`
+--
+ALTER TABLE `phpbb_profile_lang`
+  ADD PRIMARY KEY (`field_id`,`lang_id`);
+
+--
+-- Индексы таблицы `phpbb_ranks`
+--
+ALTER TABLE `phpbb_ranks`
+  ADD PRIMARY KEY (`rank_id`);
+
+--
+-- Индексы таблицы `phpbb_reports`
+--
+ALTER TABLE `phpbb_reports`
+  ADD PRIMARY KEY (`report_id`),
+  ADD KEY `post_id` (`post_id`),
+  ADD KEY `pm_id` (`pm_id`);
+
+--
+-- Индексы таблицы `phpbb_reports_reasons`
+--
+ALTER TABLE `phpbb_reports_reasons`
+  ADD PRIMARY KEY (`reason_id`);
+
+--
+-- Индексы таблицы `phpbb_search_results`
+--
+ALTER TABLE `phpbb_search_results`
+  ADD PRIMARY KEY (`search_key`);
+
+--
+-- Индексы таблицы `phpbb_search_wordlist`
+--
+ALTER TABLE `phpbb_search_wordlist`
+  ADD PRIMARY KEY (`word_id`),
+  ADD UNIQUE KEY `wrd_txt` (`word_text`),
+  ADD KEY `wrd_cnt` (`word_count`);
+
+--
+-- Индексы таблицы `phpbb_search_wordmatch`
+--
+ALTER TABLE `phpbb_search_wordmatch`
+  ADD UNIQUE KEY `un_mtch` (`word_id`,`post_id`,`title_match`),
+  ADD KEY `word_id` (`word_id`),
+  ADD KEY `post_id` (`post_id`);
+
+--
+-- Индексы таблицы `phpbb_sessions`
+--
+ALTER TABLE `phpbb_sessions`
+  ADD PRIMARY KEY (`session_id`),
+  ADD KEY `session_time` (`session_time`),
+  ADD KEY `session_user_id` (`session_user_id`),
+  ADD KEY `session_fid` (`session_forum_id`);
+
+--
+-- Индексы таблицы `phpbb_sessions_keys`
+--
+ALTER TABLE `phpbb_sessions_keys`
+  ADD PRIMARY KEY (`key_id`,`user_id`),
+  ADD KEY `last_login` (`last_login`);
+
+--
+-- Индексы таблицы `phpbb_sitelist`
+--
+ALTER TABLE `phpbb_sitelist`
+  ADD PRIMARY KEY (`site_id`);
+
+--
+-- Индексы таблицы `phpbb_smilies`
+--
+ALTER TABLE `phpbb_smilies`
+  ADD PRIMARY KEY (`smiley_id`),
+  ADD KEY `display_on_post` (`display_on_posting`);
+
+--
+-- Индексы таблицы `phpbb_styles`
+--
+ALTER TABLE `phpbb_styles`
+  ADD PRIMARY KEY (`style_id`),
+  ADD UNIQUE KEY `style_name` (`style_name`);
+
+--
+-- Индексы таблицы `phpbb_teampage`
+--
+ALTER TABLE `phpbb_teampage`
+  ADD PRIMARY KEY (`teampage_id`);
+
+--
+-- Индексы таблицы `phpbb_topics`
+--
+ALTER TABLE `phpbb_topics`
+  ADD PRIMARY KEY (`topic_id`),
+  ADD KEY `forum_id` (`forum_id`),
+  ADD KEY `forum_id_type` (`forum_id`,`topic_type`),
+  ADD KEY `last_post_time` (`topic_last_post_time`),
+  ADD KEY `fid_time_moved` (`forum_id`,`topic_last_post_time`,`topic_moved_id`),
+  ADD KEY `topic_visibility` (`topic_visibility`),
+  ADD KEY `forum_vis_last` (`forum_id`,`topic_visibility`,`topic_last_post_id`);
+
+--
+-- Индексы таблицы `phpbb_topics_posted`
+--
+ALTER TABLE `phpbb_topics_posted`
+  ADD PRIMARY KEY (`user_id`,`topic_id`);
+
+--
+-- Индексы таблицы `phpbb_topics_track`
+--
+ALTER TABLE `phpbb_topics_track`
+  ADD PRIMARY KEY (`user_id`,`topic_id`),
+  ADD KEY `forum_id` (`forum_id`),
+  ADD KEY `topic_id` (`topic_id`);
+
+--
+-- Индексы таблицы `phpbb_topics_watch`
+--
+ALTER TABLE `phpbb_topics_watch`
+  ADD KEY `topic_id` (`topic_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `notify_stat` (`notify_status`);
+
+--
+-- Индексы таблицы `phpbb_users`
+--
+ALTER TABLE `phpbb_users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username_clean` (`username_clean`),
+  ADD KEY `user_birthday` (`user_birthday`),
+  ADD KEY `user_email_hash` (`user_email_hash`),
+  ADD KEY `user_type` (`user_type`);
+
+--
+-- Индексы таблицы `phpbb_user_group`
+--
+ALTER TABLE `phpbb_user_group`
+  ADD KEY `group_id` (`group_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `group_leader` (`group_leader`);
+
+--
+-- Индексы таблицы `phpbb_warnings`
+--
+ALTER TABLE `phpbb_warnings`
+  ADD PRIMARY KEY (`warning_id`);
+
+--
+-- Индексы таблицы `phpbb_words`
+--
+ALTER TABLE `phpbb_words`
+  ADD PRIMARY KEY (`word_id`);
+
+--
+-- Индексы таблицы `phpbb_zebra`
+--
+ALTER TABLE `phpbb_zebra`
+  ADD PRIMARY KEY (`user_id`,`zebra_id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `phpbb_acl_options`
+--
+ALTER TABLE `phpbb_acl_options`
+  MODIFY `auth_option_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=123;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_acl_roles`
+--
+ALTER TABLE `phpbb_acl_roles`
+  MODIFY `role_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_attachments`
+--
+ALTER TABLE `phpbb_attachments`
+  MODIFY `attach_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_banlist`
+--
+ALTER TABLE `phpbb_banlist`
+  MODIFY `ban_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_bots`
+--
+ALTER TABLE `phpbb_bots`
+  MODIFY `bot_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_disallow`
+--
+ALTER TABLE `phpbb_disallow`
+  MODIFY `disallow_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_drafts`
+--
+ALTER TABLE `phpbb_drafts`
+  MODIFY `draft_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_extensions`
+--
+ALTER TABLE `phpbb_extensions`
+  MODIFY `extension_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_extension_groups`
+--
+ALTER TABLE `phpbb_extension_groups`
+  MODIFY `group_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_forums`
+--
+ALTER TABLE `phpbb_forums`
+  MODIFY `forum_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_groups`
+--
+ALTER TABLE `phpbb_groups`
+  MODIFY `group_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_icons`
+--
+ALTER TABLE `phpbb_icons`
+  MODIFY `icons_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_lang`
+--
+ALTER TABLE `phpbb_lang`
+  MODIFY `lang_id` tinyint(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_log`
+--
+ALTER TABLE `phpbb_log`
+  MODIFY `log_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=205;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_modules`
+--
+ALTER TABLE `phpbb_modules`
+  MODIFY `module_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=207;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_notifications`
+--
+ALTER TABLE `phpbb_notifications`
+  MODIFY `notification_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_notification_types`
+--
+ALTER TABLE `phpbb_notification_types`
+  MODIFY `notification_type_id` smallint(4) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_posts`
+--
+ALTER TABLE `phpbb_posts`
+  MODIFY `post_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_privmsgs`
+--
+ALTER TABLE `phpbb_privmsgs`
+  MODIFY `msg_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_privmsgs_folder`
+--
+ALTER TABLE `phpbb_privmsgs_folder`
+  MODIFY `folder_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_privmsgs_rules`
+--
+ALTER TABLE `phpbb_privmsgs_rules`
+  MODIFY `rule_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_profile_fields`
+--
+ALTER TABLE `phpbb_profile_fields`
+  MODIFY `field_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_ranks`
+--
+ALTER TABLE `phpbb_ranks`
+  MODIFY `rank_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_reports`
+--
+ALTER TABLE `phpbb_reports`
+  MODIFY `report_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_reports_reasons`
+--
+ALTER TABLE `phpbb_reports_reasons`
+  MODIFY `reason_id` smallint(4) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_search_wordlist`
+--
+ALTER TABLE `phpbb_search_wordlist`
+  MODIFY `word_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=595;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_sitelist`
+--
+ALTER TABLE `phpbb_sitelist`
+  MODIFY `site_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_smilies`
+--
+ALTER TABLE `phpbb_smilies`
+  MODIFY `smiley_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_styles`
+--
+ALTER TABLE `phpbb_styles`
+  MODIFY `style_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_teampage`
+--
+ALTER TABLE `phpbb_teampage`
+  MODIFY `teampage_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_topics`
+--
+ALTER TABLE `phpbb_topics`
+  MODIFY `topic_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_users`
+--
+ALTER TABLE `phpbb_users`
+  MODIFY `user_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_warnings`
+--
+ALTER TABLE `phpbb_warnings`
+  MODIFY `warning_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `phpbb_words`
+--
+ALTER TABLE `phpbb_words`
+  MODIFY `word_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
